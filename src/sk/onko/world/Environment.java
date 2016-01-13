@@ -6,9 +6,9 @@ package sk.onko.world;
 public class Environment {
 
     //RGB values of environment color (0-255)
-    private int R = 255;
-    private int G = 255;
-    private int B = 255;
+    private int R = 100;
+    private int G = 205;
+    private int B = 250;
 
     public int getR() {
         return R;

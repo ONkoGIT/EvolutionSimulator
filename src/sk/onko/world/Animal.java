@@ -6,22 +6,22 @@ package sk.onko.world;
 public class Animal {
 
 
+    private int breedChance = 50;
 
-    private int breedChance = 60;
-
-    public Animal (){
+    public Animal() {
         this.setR(150);
         this.setG(150);
         this.setB(0);
     }
 
     //For copying
-    public Animal(Animal animal){
-        this.R=animal.getR();
-        this.G=animal.getG();
-        this.B=animal.getB();
-        this.breedChance=animal.getBreedChance();
+    public Animal(Animal animal) {
+        this.R = animal.getR();
+        this.G = animal.getG();
+        this.B = animal.getB();
+        this.breedChance = animal.getBreedChance();
     }
+
     //RGB values of animals color (0-255)
     private int R;
     private int G;
@@ -32,8 +32,10 @@ public class Animal {
     }
 
     public void setR(int r) {
-        if (r<0) {
+        if (r < 0) {
             R = 0;
+        } else if (r > 255) {
+            R = 255;
         } else
             R = r;
     }
@@ -43,10 +45,12 @@ public class Animal {
     }
 
     public void setG(int g) {
-        if (g<0) {
+        if (g < 0) {
             G = 0;
+        } else if (g > 255) {
+            G = 255;
         } else
-        G = g;
+            G = g;
     }
 
     public int getB() {
@@ -54,12 +58,13 @@ public class Animal {
     }
 
     public void setB(int b) {
-        if (b<0) {
+        if (b < 0) {
             B = 0;
+        } else if (b > 255) {
+            B = 255;
         } else
             B = b;
     }
-
 
 
     public int getBreedChance() {

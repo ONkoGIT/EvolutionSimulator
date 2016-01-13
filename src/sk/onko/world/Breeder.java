@@ -23,11 +23,11 @@ public class Breeder {
 
         if (animals.size()>500) {
             megaPlagueOn=true;
-            System.out.println("- - - MEGAPlague is on - - -");
+            System.out.println("- - - MEGA Plague is on - - -");
         }
 
         if (animals.size()>600) {
-            megaPlagueOn=true;
+           absolutePlagueOn=true;
             System.out.println("- - - ABSOLUTE PLAGUE is on - - -");
         }
         for (Animal animal : animals) {
@@ -41,7 +41,7 @@ public class Breeder {
             }
 
             if (absolutePlagueOn ){
-                animal.setBreedChance(animal.getBreedChance()-50);
+                animal.setBreedChance(animal.getBreedChance()-30);
             }
 
 
