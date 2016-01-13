@@ -27,17 +27,17 @@ public class God {
 
     List<Color> colorList = new ArrayList<Color>();
 
-
     JFrame f = new JFrame();
     JFrame f2 = new JFrame();
 
     JPanel p = new JPanel();
     JPanel p2 = new JPanel();
 
+    JLabel generationNumberLabel = new JLabel();
+
     JButton animalzCurrent = new JButton();
     JButton animalzGenMinus30 = new JButton();
     JButton animalzGenMinus60 = new JButton();
-
 
     public God() {
 
@@ -45,11 +45,9 @@ public class God {
         letThereBeBeings();
         startTimeCycle();
 
-
     }
 
     private void makeSomeGUI() {
-
 
         f.setLocation(200, 200);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,15 +66,18 @@ public class God {
         animalzCurrent.setVisible(true);
 
         animalzGenMinus30.setBounds(140, 150, 100, 100);
-        animalzGenMinus30.setText("T-30");
+        animalzGenMinus30.setText("G-30");
         p.add(animalzGenMinus30);
         animalzGenMinus30.setVisible(true);
 
         animalzGenMinus60.setBounds(50, 150, 80, 80);
-        animalzGenMinus60.setText("T-60");
+        animalzGenMinus60.setText("G-60");
         p.add(animalzGenMinus60);
         animalzGenMinus60.setVisible(true);
 
+        generationNumberLabel.setText("Generation");
+        generationNumberLabel.setBounds(300,400,200,50);
+        p.add(generationNumberLabel);
 
         p.setVisible(true);
         f.setVisible(true);
@@ -183,6 +184,7 @@ public class God {
 
 
             cyclesElapsed++;
+            generationNumberLabel.setText("Generation " + cyclesElapsed);
 
         }
     }
