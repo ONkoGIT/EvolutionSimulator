@@ -8,63 +8,58 @@ import java.util.List;
  */
 public class Breeder {
 
-    public List<Animal> breed (List<Animal> animals){
+    public int plagueLevel = 0;
+
+    public List<Animal> breed(List<Animal> animals) {
+
+        plagueLevel = 0;
 
         List<Animal> newAnimals = new ArrayList<Animal>();
 
-        boolean plagueOn = false;
-        boolean megaPlagueOn = false;
-        boolean absolutePlagueOn = false;
+        if (animals.size() >= 400 && animals.size() < 500) {
 
-        if (animals.size()>400) {
-            plagueOn=true;
-            System.out.println("- - - Plague is on - - -");
+            plagueLevel = 1;
+
+            System.out.println("- - - Plague level 1 - - -");
+        } else if (animals.size() >= 500 && animals.size() < 600) {
+            plagueLevel = 2;
+            System.out.println("- - - Plague level 2 - - -");
+        } else if (animals.size() >= 600) {
+            plagueLevel = 3;
+            System.out.println("- - - Plague level 3 - - -");
         }
 
-        if (animals.size()>500) {
-            megaPlagueOn=true;
-            System.out.println("- - - MEGA Plague is on - - -");
-        }
-
-        if (animals.size()>600) {
-           absolutePlagueOn=true;
-            System.out.println("- - - ABSOLUTE PLAGUE is on - - -");
-        }
         for (Animal animal : animals) {
 
-            if (plagueOn ){
-                animal.setBreedChance(animal.getBreedChance()-5);
+            switch (plagueLevel) {
+                case (1):
+                    animal.setBreedChance(animal.getBreedChance() - 5);
+                    break;
+                case (2):
+                    animal.setBreedChance(animal.getBreedChance() - 15);
+                    break;
+                case (3):
+                    animal.setBreedChance(animal.getBreedChance() - 30);
+                    break;
+                default:
             }
-
-            if (megaPlagueOn ){
-                animal.setBreedChance(animal.getBreedChance()-15);
-            }
-
-            if (absolutePlagueOn ){
-                animal.setBreedChance(animal.getBreedChance()-30);
-            }
-
-
-
-
-
 
 
             if (animal.getBreedChance() >= 100) {
 
 
-                int numberOfBirthedAnimals = animal.getBreedChance()/100;
+                int numberOfBirthedAnimals = animal.getBreedChance() / 100;
 
-                for (int i=0; i<numberOfBirthedAnimals;i++){
+                for (int i = 0; i < numberOfBirthedAnimals; i++) {
                     //Creates a copy of birthing animal
                     newAnimals.add(new Animal(animal));
                 }
 
-                if (Math.random()*100<= animal.getBreedChance()%100){
+                if (Math.random() * 100 <= animal.getBreedChance() % 100) {
                     newAnimals.add(new Animal(animal));
                 }
 
-            } else if (Math.random()*100<= animal.getBreedChance()%100){
+            } else if (Math.random() * 100 <= animal.getBreedChance() % 100) {
                 newAnimals.add(new Animal(animal));
             }
 

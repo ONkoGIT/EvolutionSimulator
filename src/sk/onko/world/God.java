@@ -34,6 +34,9 @@ public class God {
     JPanel p2 = new JPanel();
 
     JLabel generationNumberLabel = new JLabel();
+    JLabel plagueLabel = new JLabel();
+    JLabel populationLabel = new JLabel();
+
 
     JButton animalzCurrent = new JButton();
     JButton animalzGenMinus30 = new JButton();
@@ -50,7 +53,7 @@ public class God {
     private void makeSomeGUI() {
 
         f.setLocation(200, 200);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setSize(500, 500);
         f.setResizable(false);
         f.setTitle("Evolution simulation");
@@ -76,17 +79,28 @@ public class God {
         animalzGenMinus60.setVisible(true);
 
         generationNumberLabel.setText("Generation");
-        generationNumberLabel.setBounds(300,400,200,50);
+        generationNumberLabel.setBounds(300, 400, 200, 30);
         p.add(generationNumberLabel);
+
+
+        plagueLabel.setText("Environment is friendly.");
+        plagueLabel.setBounds(50, 50, 250, 30);
+        p.add(plagueLabel);
+        plagueLabel.setVisible(true);
+
+        populationLabel.setText("Population :");
+        populationLabel.setBounds(300, 430, 250, 30);
+        p.add(populationLabel);
+        populationLabel.setVisible(true);
 
         p.setVisible(true);
         f.setVisible(true);
 
-        f2.setLocation(200, 200);
-        f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f2.setLocation(200, 100);
+        f2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f2.setSize(1500, 100);
         f2.setResizable(false);
-        f2.setTitle("Evolution simulation");
+        f2.setTitle("Color view of every animal");
 
         p2.setSize(1500, 100);
         p2.setLayout(null);
@@ -107,6 +121,25 @@ public class God {
 
             beings = mutator.mutate(beings, environment);
             beings = breeder.breed(beings);
+
+            populationLabel.setText("Population : " + beings.size());
+
+            switch (breeder.plagueLevel) {
+
+                case 1:
+                    plagueLabel.setText("<html><font color=red>Plague level 1 in the world </font></html>");
+                    break;
+                case 2:
+                    plagueLabel.setText("<html><font color=red>Plague level 2 in the world </font></html>");
+                    break;
+                case 3:
+                    plagueLabel.setText("<html><font color=red>Plague level 3 in the world </font></html>");
+                    break;
+                default:
+                    plagueLabel.setText("Environment is friendly.");
+
+            }
+
 
             int position = 0;
             p2.removeAll();
@@ -158,7 +191,7 @@ public class God {
                 animalzGenMinus60.setBackground(colorList.get(0));
             }
 
-            if (colorList.size()>=60){
+            if (colorList.size() >= 60) {
                 colorList.add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
                 animalzGenMinus30.setBackground(colorList.get(30));
                 animalzGenMinus60.setBackground(colorList.get(0));
