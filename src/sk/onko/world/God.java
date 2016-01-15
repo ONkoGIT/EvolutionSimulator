@@ -26,12 +26,15 @@ public class God {
     int averageAnimalBGenMinus30 = 0;
 
     List<Color> colorList = new ArrayList<Color>();
+    List<Color> allAverageColors = new ArrayList<Color>();
 
     JFrame f = new JFrame();
     JFrame f2 = new JFrame();
+    JFrame f3 = new JFrame();
 
     JPanel p = new JPanel();
     JPanel p2 = new JPanel();
+    JPanel p3 = new JPanel();
 
     JLabel generationNumberLabel = new JLabel();
     JLabel plagueLabel = new JLabel();
@@ -110,6 +113,20 @@ public class God {
         p2.setVisible(true);
         f2.setVisible(true);
 
+        f3.setLocation(200, 100);
+        f3.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f3.setSize(1500, 100);
+        f3.setResizable(false);
+        f3.setTitle("Color evolution trend ");
+
+        p3.setSize(1500, 100);
+        p3.setLayout(null);
+        f3.add(p3);
+
+        p3.setBackground(new Color(0, 0, 0));
+        p3.setVisible(true);
+        f3.setVisible(true);
+
     }
 
     private void startTimeCycle() {
@@ -173,6 +190,9 @@ public class God {
 
             p2.repaint();
 
+            p3.removeAll();
+             position = 0;
+
 
             System.out.println(" - - - Number of beings : " + beings.size() + " - - -");
             if (beings.size() >= 1000 || beings.size() <= 0) {
@@ -184,6 +204,26 @@ public class God {
             averageAnimalR /= beings.size();
             averageAnimalG /= beings.size();
             averageAnimalB /= beings.size();
+
+            allAverageColors.add(new Color(averageAnimalR,averageAnimalG,averageAnimalB));
+            for (Color color : allAverageColors) {
+
+
+                JLabel colorHistoryLabel = new JLabel();
+                colorHistoryLabel.setOpaque(true);
+
+                int x_pos = ((1000 / allAverageColors.size()) * position);
+                colorHistoryLabel.setBounds(x_pos, 0, (1500 / allAverageColors.size()), 100);
+
+                colorHistoryLabel.setBackground(color);
+
+                p3.add(colorHistoryLabel);
+                colorHistoryLabel.setVisible(true);
+                position++;
+
+            }
+
+            p3.repaint();
 
             if (colorList.size() < 60) {
                 colorList.add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
@@ -207,7 +247,6 @@ public class God {
                 e.printStackTrace();
 
             }
-
 
             try {
                 Thread.sleep(200);
