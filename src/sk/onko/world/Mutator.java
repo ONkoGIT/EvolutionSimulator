@@ -22,8 +22,12 @@ public class Mutator {
                 animal.setR((int)(animal.getR()+(Math.random()*8)-4));
                 animal.setG((int)(animal.getG()+(Math.random()*8))-4);
                 animal.setB((int)(animal.getB()+(Math.random()*8)-4));
-                animal.setBreedChance(breedChanceCalculator.calculateBreedChance(animal,environment));
-                System.out.println("Mutation !, new RGB is : " + animal.getR() + " " + animal.getG()+ " "  + animal.getB() + " Breed chance: " + animal.getBreedChance());
+
+                int newBreedChance = breedChanceCalculator.calculateBreedChance(animal,environment);
+
+                animal.setBreedChance( newBreedChance );
+                animal.setBreedChanceWithoutPlague( newBreedChance );
+                //System.out.println("Mutation !, new RGB is : " + animal.getR() + " " + animal.getG()+ " "  + animal.getB() + " Breed chance: " + animal.getBreedChance());
                 }
         }
 

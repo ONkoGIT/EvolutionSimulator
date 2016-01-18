@@ -1,5 +1,7 @@
 package sk.onko.world;
 
+import sk.onko.gui.GraphMark;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,20 +23,23 @@ public class God {
     int averageAnimalG = 0;
     int averageAnimalB = 0;
 
-    int averageAnimalRGenMinus30 = 0;
-    int averageAnimalGGenMinus30 = 0;
-    int averageAnimalBGenMinus30 = 0;
+    List<Integer> averageBreedChances = new ArrayList<Integer>();
+
+    int averageBreedChance = 0;
 
     List<Color> colorList = new ArrayList<Color>();
     List<Color> allAverageColors = new ArrayList<Color>();
+    List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 
     JFrame f = new JFrame();
     JFrame f2 = new JFrame();
     JFrame f3 = new JFrame();
+    JFrame f4 = new JFrame();
 
     JPanel p = new JPanel();
     JPanel p2 = new JPanel();
     JPanel p3 = new JPanel();
+    JPanel p4 = new JPanel();
 
     JLabel generationNumberLabel = new JLabel();
     JLabel plagueLabel = new JLabel();
@@ -127,12 +132,38 @@ public class God {
         p3.setVisible(true);
         f3.setVisible(true);
 
+        f4.setLocation(200, 100);
+        f4.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f4.setSize(1500, 600);
+        f4.setResizable(false);
+        f4.setTitle("Color evolution trend ");
+
+        p4.setSize(1500, 600);
+        p4.setLayout(null);
+        f4.add(p4);
+
+        for (int i=0;i<50;i++){
+            graphMarks.add(new GraphMark());
+
+            graphMarks.get(i).setBounds(i*25,(270- graphMarks.get(i).getY()),15,15);
+            p4.add(graphMarks.get(i));
+        }
+
+        p4.setBackground(new Color(255,255,255));
+        p4.setVisible(true);
+        f4.setVisible(true);
+
     }
 
     private void startTimeCycle() {
         int cyclesElapsed = 0;
 
         while (cyclesElapsed <= 100000) {
+
+            averageBreedChance=0;
+            averageAnimalR=0;
+            averageAnimalG=0;
+            averageAnimalB=0;
 
             System.out.println(" - - - Starting time cycle number " + cyclesElapsed + " - - -");
 
@@ -168,6 +199,8 @@ public class God {
                 averageAnimalG += animal.getG();
                 averageAnimalB += animal.getB();
 
+                averageBreedChance += animal.getBreedChanceWithoutPlague();
+
 
                 // JButton animalColorLabel = new JButton();
                 JLabel animalColorLabel = new JLabel();
@@ -200,6 +233,10 @@ public class God {
                 cyclesElapsed = 999999999;
 
             }
+
+            averageBreedChance /= beings.size();
+            averageBreedChances.add(averageBreedChance);
+            System.out.println("Average breed chance : " + averageBreedChance);
 
             averageAnimalR /= beings.size();
             averageAnimalG /= beings.size();
@@ -256,9 +293,27 @@ public class God {
 
 
             cyclesElapsed++;
+
+            if(cyclesElapsed%50==0){
+                updateGraph();
+            }
             generationNumberLabel.setText("Generation " + cyclesElapsed);
 
         }
+    }
+
+    private void updateGraph() {
+        int positionOfGraphMarker = 0;
+
+        for(GraphMark graphMark : graphMarks){
+            graphMark.setBackground(allAverageColors.get((int)(positionOfGraphMarker*(allAverageColors.size()/50))));
+            graphMark.setYfromBottom(averageBreedChances.get((int)(positionOfGraphMarker*(averageBreedChances.size()/50))));
+
+
+            positionOfGraphMarker++;
+        }
+        p4.repaint();
+        System.out.println("Graph updated");
     }
 
     private void letThereBeBeings() {

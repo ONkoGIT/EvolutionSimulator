@@ -7,6 +7,9 @@ public class Animal {
 
 
     private int breedChance = 50;
+    private int breedChanceWithoutPlague=50;
+
+
 
     public Animal() {
         this.setR(150);
@@ -20,6 +23,7 @@ public class Animal {
         this.G = animal.getG();
         this.B = animal.getB();
         this.breedChance = animal.getBreedChance();
+        this.breedChanceWithoutPlague = animal.getBreedChanceWithoutPlague();
     }
 
     //RGB values of animals color (0-255)
@@ -75,5 +79,12 @@ public class Animal {
         this.breedChance = breedChance;
     }
 
+    public int getBreedChanceWithoutPlague() {
+        return breedChanceWithoutPlague;
+    }
+
+    public void setBreedChanceWithoutPlague(int breedChanceWithoutPlague) {
+        this.breedChanceWithoutPlague = breedChanceWithoutPlague;
+    }
 
 }
