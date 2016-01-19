@@ -1,4 +1,7 @@
-package sk.onko.world;
+package sk.onko.evosimulator.world;
+
+import sk.onko.evosimulator.model.Animal;
+import sk.onko.evosimulator.model.Environment;
 
 /**
  * Created by Ondrej on 12.1.2016.

@@ -1,4 +1,4 @@
-package sk.onko.world;
+package sk.onko.evosimulator.model;
 
 /**
  * Created by Ondrej on 12.1.2016.

@@ -1,4 +1,4 @@
-package sk.onko.gui;
+package sk.onko.evosimulator.gui;
 
 import javax.swing.*;
 import java.awt.*;

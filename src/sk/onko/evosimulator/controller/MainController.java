@@ -1,6 +1,11 @@
-package sk.onko.world;
+package sk.onko.evosimulator.controller;
 
-import sk.onko.gui.GraphMark;
+import sk.onko.evosimulator.model.Animal;
+import sk.onko.evosimulator.gui.GraphMark;
+import sk.onko.evosimulator.view.MainView;
+import sk.onko.evosimulator.world.Breeder;
+import sk.onko.evosimulator.model.Environment;
+import sk.onko.evosimulator.world.Mutator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +17,10 @@ import javax.swing.JPanel;
 /**
  * Created by Ondrej on 12.1.2016.
  */
-public class God {
+public class MainController {
 
+
+    public MainView mainView = new MainView();
     protected List<Animal> beings = new ArrayList<Animal>();
     protected Mutator mutator = new Mutator();
     protected Breeder breeder = new Breeder();
@@ -50,7 +57,7 @@ public class God {
     JButton animalzGenMinus30 = new JButton();
     JButton animalzGenMinus60 = new JButton();
 
-    public God() {
+    public MainController() {
 
         makeSomeGUI();
         letThereBeBeings();
@@ -59,7 +66,6 @@ public class God {
     }
 
     private void makeSomeGUI() {
-
         f.setLocation(200, 200);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setSize(500, 500);
@@ -306,8 +312,8 @@ public class God {
         int positionOfGraphMarker = 0;
 
         for(GraphMark graphMark : graphMarks){
-            graphMark.setBackground(allAverageColors.get((int)(positionOfGraphMarker*(allAverageColors.size()/50))));
-            graphMark.setYfromBottom(averageBreedChances.get((int)(positionOfGraphMarker*(averageBreedChances.size()/50))));
+            graphMark.setBackground(allAverageColors.get((positionOfGraphMarker*(allAverageColors.size()/50))));
+            graphMark.setYfromBottom(averageBreedChances.get((positionOfGraphMarker*(averageBreedChances.size()/50))));
 
 
             positionOfGraphMarker++;

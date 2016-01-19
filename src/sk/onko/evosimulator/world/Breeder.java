@@ -1,4 +1,6 @@
-package sk.onko.world;
+package sk.onko.evosimulator.world;
+
+import sk.onko.evosimulator.model.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
