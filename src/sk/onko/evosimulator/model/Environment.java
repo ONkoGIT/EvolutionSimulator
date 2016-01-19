@@ -5,8 +5,11 @@ package sk.onko.evosimulator.model;
  */
 public class Environment {
 
+    //Affects breeding chances
+    private int plagueLevel;
+
     //RGB values of environment color (0-255)
-    private int R = 100;
+    private int R = 200;
     private int G = 205;
     private int B = 250;
 
@@ -32,5 +35,13 @@ public class Environment {
 
     public void setB(int b) {
         B = b;
+    }
+
+    public int getPlagueLevel() {
+        return plagueLevel;
+    }
+
+    public void setPlagueLevel(int plagueLevel) {
+        this.plagueLevel = plagueLevel;
     }
 }

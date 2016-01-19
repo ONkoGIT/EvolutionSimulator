@@ -2,6 +2,7 @@ package sk.onko.evosimulator.controller;
 
 import sk.onko.evosimulator.model.Animal;
 import sk.onko.evosimulator.gui.GraphMark;
+import sk.onko.evosimulator.model.MainModel;
 import sk.onko.evosimulator.view.MainView;
 import sk.onko.evosimulator.world.Breeder;
 import sk.onko.evosimulator.model.Environment;
@@ -19,278 +20,128 @@ import javax.swing.JPanel;
  */
 public class MainController {
 
+    private MainModel mainModel;
 
-    public MainView mainView = new MainView();
+
+    public MainView mainView;
+
     protected List<Animal> beings = new ArrayList<Animal>();
     protected Mutator mutator = new Mutator();
     protected Breeder breeder = new Breeder();
-    protected Environment environment = new Environment();
-
-    int averageAnimalR = 0;
-    int averageAnimalG = 0;
-    int averageAnimalB = 0;
 
     List<Integer> averageBreedChances = new ArrayList<Integer>();
 
-    int averageBreedChance = 0;
-
-    List<Color> colorList = new ArrayList<Color>();
     List<Color> allAverageColors = new ArrayList<Color>();
     List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 
-    JFrame f = new JFrame();
-    JFrame f2 = new JFrame();
-    JFrame f3 = new JFrame();
-    JFrame f4 = new JFrame();
 
-    JPanel p = new JPanel();
-    JPanel p2 = new JPanel();
-    JPanel p3 = new JPanel();
-    JPanel p4 = new JPanel();
+    public MainController(MainModel mainModel, MainView mainView) {
 
-    JLabel generationNumberLabel = new JLabel();
-    JLabel plagueLabel = new JLabel();
-    JLabel populationLabel = new JLabel();
+        this.mainModel = mainModel;
+        this.mainView = mainView;
 
-
-    JButton animalzCurrent = new JButton();
-    JButton animalzGenMinus30 = new JButton();
-    JButton animalzGenMinus60 = new JButton();
-
-    public MainController() {
-
-        makeSomeGUI();
-        letThereBeBeings();
+      //  letThereBeBeings();
         startTimeCycle();
 
     }
 
-    private void makeSomeGUI() {
-        f.setLocation(200, 200);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setSize(500, 500);
-        f.setResizable(false);
-        f.setTitle("Evolution simulation");
-
-        p.setSize(500, 500);
-        p.setLayout(null);
-        p.setBackground(new Color(environment.getR(), environment.getG(), environment.getB()));
-        f.add(p);
-
-        animalzCurrent.setBounds(250, 150, 200, 200);
-        animalzCurrent.setText("Average color of animals");
-        p.add(animalzCurrent);
-        animalzCurrent.setVisible(true);
-
-        animalzGenMinus30.setBounds(140, 150, 100, 100);
-        animalzGenMinus30.setText("G-30");
-        p.add(animalzGenMinus30);
-        animalzGenMinus30.setVisible(true);
-
-        animalzGenMinus60.setBounds(50, 150, 80, 80);
-        animalzGenMinus60.setText("G-60");
-        p.add(animalzGenMinus60);
-        animalzGenMinus60.setVisible(true);
-
-        generationNumberLabel.setText("Generation");
-        generationNumberLabel.setBounds(300, 400, 200, 30);
-        p.add(generationNumberLabel);
-
-
-        plagueLabel.setText("Environment is friendly.");
-        plagueLabel.setBounds(50, 50, 250, 30);
-        p.add(plagueLabel);
-        plagueLabel.setVisible(true);
-
-        populationLabel.setText("Population :");
-        populationLabel.setBounds(300, 430, 250, 30);
-        p.add(populationLabel);
-        populationLabel.setVisible(true);
-
-        p.setVisible(true);
-        f.setVisible(true);
-
-        f2.setLocation(200, 100);
-        f2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f2.setSize(1500, 100);
-        f2.setResizable(false);
-        f2.setTitle("Color view of every animal");
-
-        p2.setSize(1500, 100);
-        p2.setLayout(null);
-        f2.add(p2);
-
-        p2.setBackground(new Color(0, 0, 0));
-        p2.setVisible(true);
-        f2.setVisible(true);
-
-        f3.setLocation(200, 100);
-        f3.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f3.setSize(1500, 100);
-        f3.setResizable(false);
-        f3.setTitle("Color evolution trend ");
-
-        p3.setSize(1500, 100);
-        p3.setLayout(null);
-        f3.add(p3);
-
-        p3.setBackground(new Color(0, 0, 0));
-        p3.setVisible(true);
-        f3.setVisible(true);
-
-        f4.setLocation(200, 100);
-        f4.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f4.setSize(1500, 600);
-        f4.setResizable(false);
-        f4.setTitle("Color evolution trend ");
-
-        p4.setSize(1500, 600);
-        p4.setLayout(null);
-        f4.add(p4);
-
-        for (int i=0;i<50;i++){
-            graphMarks.add(new GraphMark());
-
-            graphMarks.get(i).setBounds(i*25,(270- graphMarks.get(i).getY()),15,15);
-            p4.add(graphMarks.get(i));
-        }
-
-        p4.setBackground(new Color(255,255,255));
-        p4.setVisible(true);
-        f4.setVisible(true);
-
-    }
 
     private void startTimeCycle() {
         int cyclesElapsed = 0;
 
         while (cyclesElapsed <= 100000) {
 
-            averageBreedChance=0;
-            averageAnimalR=0;
-            averageAnimalG=0;
-            averageAnimalB=0;
+
+            //Changes in model instead of here
+            //Change to mainModel.setZeroToAverageValues()
+            mainModel.setAverageBreedChance(0);
+            mainModel.setAverageAnimalR(0);
+            mainModel.setAverageAnimalG(0);
+            mainModel.setAverageAnimalB(0);
 
             System.out.println(" - - - Starting time cycle number " + cyclesElapsed + " - - -");
 
-            beings = mutator.mutate(beings, environment);
-            beings = breeder.breed(beings);
+            //New
+            mainModel.setAnimals(mutator.mutate(mainModel.getAnimals(), mainModel.getEnvironment()));
+            mainModel.setAnimals(breeder.breed(mainModel.getAnimals()));
 
-            populationLabel.setText("Population : " + beings.size());
+            //new { getting average values
 
-            switch (breeder.plagueLevel) {
+            {
 
-                case 1:
-                    plagueLabel.setText("<html><font color=red>Plague level 1 in the world </font></html>");
-                    break;
-                case 2:
-                    plagueLabel.setText("<html><font color=red>Plague level 2 in the world </font></html>");
-                    break;
-                case 3:
-                    plagueLabel.setText("<html><font color=red>Plague level 3 in the world </font></html>");
-                    break;
-                default:
-                    plagueLabel.setText("Environment is friendly.");
+                int averageAnimalR = 0;
+                int averageAnimalG = 0;
+                int averageAnimalB = 0;
+                int averageBreedChance = 0;
 
+                for (Animal animal : mainModel.getAnimals()) {
+
+                    averageAnimalR += animal.getR();
+                    averageAnimalG += animal.getG();
+                    averageAnimalB += animal.getB();
+
+                    averageBreedChance += animal.getBreedChanceWithoutPlague();
+
+                }
+
+                averageAnimalR/=mainModel.getAnimals().size();
+                averageAnimalG/=mainModel.getAnimals().size();
+                averageAnimalB/=mainModel.getAnimals().size();
+
+                mainModel.setAverageAnimalR(averageAnimalR);
+                mainModel.setAverageAnimalG(averageAnimalG);
+                mainModel.setAverageAnimalB(averageAnimalB);
+
+                //needed ?
+                averageBreedChance = averageBreedChance / mainModel.getAnimals().size();
+                mainModel.setAverageBreedChance(averageBreedChance);
+                mainModel.getAverageBreedChances().add(averageBreedChance);
             }
 
-
-            int position = 0;
-            p2.removeAll();
-
-            //getting average colors of animals
-            for (Animal animal : beings) {
-
-                averageAnimalR += animal.getR();
-                averageAnimalG += animal.getG();
-                averageAnimalB += animal.getB();
-
-                averageBreedChance += animal.getBreedChanceWithoutPlague();
+            System.out.println(" - - - Number of beings : " +mainModel.getAnimals().size() + " - - -");
 
 
-                // JButton animalColorLabel = new JButton();
-                JLabel animalColorLabel = new JLabel();
-                animalColorLabel.setOpaque(true);
-
-                int x_pos = ((1000 / beings.size()) * position);
-                animalColorLabel.setBounds(x_pos, 0, (1500 / beings.size()), 100);
-
-                int redColor = animal.getR();
-                int greenColor = animal.getG();
-                int blueColor = animal.getB();
-
-                animalColorLabel.setBackground(new Color(redColor, greenColor, blueColor));
-
-                p2.add(animalColorLabel);
-                animalColorLabel.setVisible(true);
-                position++;
-
-            }
-
-            p2.repaint();
-
-            p3.removeAll();
-             position = 0;
-
-
-            System.out.println(" - - - Number of beings : " + beings.size() + " - - -");
-            if (beings.size() >= 1000 || beings.size() <= 0) {
+            if (mainModel.getAnimals().size() >= 1000 || mainModel.getAnimals().size() <= 0) {
                 System.out.println(" - - - Number of beings : " + beings.size() + " - TOO HIGH/LOW. SIMULATION ENDING.");
                 cyclesElapsed = 999999999;
 
             }
 
-            averageBreedChance /= beings.size();
-            averageBreedChances.add(averageBreedChance);
-            System.out.println("Average breed chance : " + averageBreedChance);
-
-            averageAnimalR /= beings.size();
-            averageAnimalG /= beings.size();
-            averageAnimalB /= beings.size();
-
-            allAverageColors.add(new Color(averageAnimalR,averageAnimalG,averageAnimalB));
-            for (Color color : allAverageColors) {
+            //model update
+            mainModel.setAverageBreedChance(mainModel.getAverageBreedChance() / mainModel.getAnimals().size());
+            mainModel.getAverageBreedChances().add(mainModel.getAverageBreedChance());
 
 
-                JLabel colorHistoryLabel = new JLabel();
-                colorHistoryLabel.setOpaque(true);
+            //model update
+            mainModel.setAverageAnimalR(mainModel.getAverageAnimalR() / mainModel.getAnimals().size());
+            mainModel.setAverageAnimalG(mainModel.getAverageAnimalG() / mainModel.getAnimals().size());
+            mainModel.setAverageAnimalB(mainModel.getAverageAnimalB() / mainModel.getAnimals().size());
 
-                int x_pos = ((1000 / allAverageColors.size()) * position);
-                colorHistoryLabel.setBounds(x_pos, 0, (1500 / allAverageColors.size()), 100);
 
-                colorHistoryLabel.setBackground(color);
+            //model update
+            Color newAverageAnimalColor = new Color(mainModel.getAverageAnimalR(), mainModel.getAverageAnimalG(), mainModel.getAverageAnimalB());
+            mainModel.getAllAverageColors().add(newAverageAnimalColor);
 
-                p3.add(colorHistoryLabel);
-                colorHistoryLabel.setVisible(true);
-                position++;
 
+            //new style
+            {
+                int averageAnimalR = mainModel.getAverageAnimalR();
+                int averageAnimalG = mainModel.getAverageAnimalG();
+                int averageAnimalB = mainModel.getAverageAnimalB();
+
+                if (mainModel.getColorList().size() < 60) {
+                    mainModel.getColorList().add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
+                }
+
+                if (mainModel.getColorList().size() >= 60) {
+                    mainModel.getColorList().add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
+                    mainModel.getColorList().remove(0);
+                }
             }
 
-            p3.repaint();
 
-            if (colorList.size() < 60) {
-                colorList.add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
-                animalzGenMinus30.setBackground(colorList.get(0));
-                animalzGenMinus60.setBackground(colorList.get(0));
-            }
 
-            if (colorList.size() >= 60) {
-                colorList.add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
-                animalzGenMinus30.setBackground(colorList.get(30));
-                animalzGenMinus60.setBackground(colorList.get(0));
-                colorList.remove(0);
-            }
-
-            try {
-                animalzCurrent.setBackground(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
-            } catch (IllegalArgumentException e) {
-
-                System.out.println("Error trying to set color to :" + averageAnimalR + " " + averageAnimalG + " " + averageAnimalB);
-                System.out.println("Size of beings list is  :" + beings.size());
-                e.printStackTrace();
-
-            }
-
+            mainView.updateView(mainModel);
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
@@ -300,25 +151,30 @@ public class MainController {
 
             cyclesElapsed++;
 
-            if(cyclesElapsed%50==0){
-                updateGraph();
-            }
-            generationNumberLabel.setText("Generation " + cyclesElapsed);
+
+
+           // if (cyclesElapsed % 50 == 0) {
+           //     updateGraph();
+          //  }
+            mainModel.setCyclesElapsed(cyclesElapsed);
+
 
         }
     }
 
+
+    //Moved to view
     private void updateGraph() {
         int positionOfGraphMarker = 0;
 
-        for(GraphMark graphMark : graphMarks){
-            graphMark.setBackground(allAverageColors.get((positionOfGraphMarker*(allAverageColors.size()/50))));
-            graphMark.setYfromBottom(averageBreedChances.get((positionOfGraphMarker*(averageBreedChances.size()/50))));
+        for (GraphMark graphMark : graphMarks) {
+            graphMark.setBackground(allAverageColors.get((positionOfGraphMarker * (allAverageColors.size() / 50))));
+            graphMark.setYfromBottom(averageBreedChances.get((positionOfGraphMarker * (averageBreedChances.size() / 50))));
 
 
             positionOfGraphMarker++;
         }
-        p4.repaint();
+
         System.out.println("Graph updated");
     }
 
