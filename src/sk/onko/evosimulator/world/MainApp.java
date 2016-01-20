@@ -2,6 +2,7 @@ package sk.onko.evosimulator.world;
 
 
 import sk.onko.evosimulator.controller.MainController;
+import sk.onko.evosimulator.factories.MainModelFactory;
 import sk.onko.evosimulator.model.MainModel;
 import sk.onko.evosimulator.view.MainView;
 
@@ -12,7 +13,7 @@ public class MainApp {
 
     public static void main(String[]args){
 
-        new MainController(new MainModel(),new MainView());
+        new MainController(MainModelFactory.getBasicMainModel(),new MainView());
 
     }
 

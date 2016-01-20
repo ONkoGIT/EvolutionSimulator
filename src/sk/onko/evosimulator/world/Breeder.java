@@ -1,6 +1,7 @@
 package sk.onko.evosimulator.world;
 
 import sk.onko.evosimulator.model.Animal;
+import sk.onko.evosimulator.model.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,15 @@ import java.util.List;
  */
 public class Breeder {
 
-    public int plagueLevel = 0;
+    public int plagueLevel;
 
-    public List<Animal> breed(List<Animal> animals) {
+    public List<Animal> breed(List<Animal> animals, Environment environment) {
 
-        plagueLevel = 0;
+        plagueLevel = environment.getPlagueLevel();
 
         List<Animal> newAnimals = new ArrayList<Animal>();
+
+        plagueLevel= 0;
 
         if (animals.size() >= 400 && animals.size() < 500) {
 
@@ -30,6 +33,8 @@ public class Breeder {
             plagueLevel = 3;
             System.out.println("- - - Plague level 3 - - -");
         }
+
+        environment.setPlagueLevel(plagueLevel);
 
         for (Animal animal : animals) {
 

@@ -1,5 +1,7 @@
 package sk.onko.evosimulator.model;
 
+import sk.onko.evosimulator.factories.EnvironmentFactory;
+import sk.onko.evosimulator.factories.MainModelFactory;
 import sk.onko.evosimulator.gui.GraphMark;
 
 import java.awt.*;
@@ -11,11 +13,7 @@ import java.util.List;
  */
 public class MainModel {
 
-    //General info class or straight up general info for simulation
-
-    //Environment class
     private Environment environment;
-
 
     //Creature list
     private List<Animal> animals;
@@ -30,7 +28,9 @@ public class MainModel {
         this.cyclesElapsed = cyclesElapsed;
     }
 
-    int averageAnimalR = 0;
+    int averageAnimalR;
+    int averageAnimalG;
+    int averageAnimalB;
 
     public int getAverageAnimalR() {
         return averageAnimalR;
@@ -38,24 +38,6 @@ public class MainModel {
 
     public MainModel() {
 
-
-
-
-        //TODO Move to ModelFactory
-
-        environment= new Environment();
-        {
-            this.setAnimals(new ArrayList<>());
-            for (int i = 0; i < 100; i++) {
-                Animal animal = new Animal();
-                animal.setR(80);
-                animal.setG(200);
-                animal.setB(50);
-                animals.add(animal);
-            }
-
-            System.out.println( animals.size());
-        }
     }
 
     public void setAverageAnimalR(int averageAnimalR) {
@@ -134,9 +116,6 @@ public class MainModel {
         this.graphMarks = graphMarks;
     }
 
-    int averageAnimalG = 0;
-    int averageAnimalB = 0;
-
     List<Integer> averageBreedChances = new ArrayList<Integer>();
 
     int averageBreedChance = 0;
@@ -145,5 +124,4 @@ public class MainModel {
     List<Color> allAverageColors = new ArrayList<Color>();
     List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 
-    //
 }

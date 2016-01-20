@@ -4,12 +4,8 @@ package sk.onko.evosimulator.model;
  * Created by Ondrej on 12.1.2016.
  */
 public class Animal {
-
-
     private int breedChance = 50;
     private int breedChanceWithoutPlague=50;
-
-
 
     public Animal() {
         this.setR(150);
@@ -69,7 +65,6 @@ public class Animal {
         } else
             B = b;
     }
-
 
     public int getBreedChance() {
         return breedChance;
