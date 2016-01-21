@@ -5,6 +5,7 @@ import sk.onko.evosimulator.gui.GraphMark;
 import sk.onko.evosimulator.model.MainModel;
 import sk.onko.evosimulator.model.ModelUpdater;
 import sk.onko.evosimulator.view.MainView;
+import sk.onko.evosimulator.view.gui.UpdateableView;
 import sk.onko.evosimulator.world.Breeder;
 import sk.onko.evosimulator.model.Environment;
 import sk.onko.evosimulator.world.Mutator;
@@ -24,7 +25,7 @@ public class MainController {
     private MainModel mainModel;
     private ModelUpdater modelUpdater = new ModelUpdater();
 
-    public MainView mainView;
+    public UpdateableView mainView;
 
     protected List<Animal> beings = new ArrayList<Animal>();
     protected Mutator mutator = new Mutator();
@@ -58,8 +59,6 @@ public class MainController {
                 System.out.println(" - - - Starting time cycle number " + cyclesElapsed + " - - -");
             }
 
-            //TODO Outsource model updates to ModelUpdater (or its interface for bonus points)
-
             //TODO this changes mainModel fields, not modelUpdaters - make it more clear
             modelUpdater.resetAverageValues(mainModel);
 
@@ -75,25 +74,9 @@ public class MainController {
             mainModel.setAverageBreedChance(mainModel.getAverageBreedChance() / mainModel.getAnimals().size());
             mainModel.getAverageBreedChances().add(mainModel.getAverageBreedChance());
 
-            //new style
-            {
-                int averageAnimalR = mainModel.getAverageAnimalR();
-                int averageAnimalG = mainModel.getAverageAnimalG();
-                int averageAnimalB = mainModel.getAverageAnimalB();
-
-                if (mainModel.getColorList().size() < 60) {
-                    mainModel.getColorList().add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
-                }
-
-                if (mainModel.getColorList().size() > 60) {
-                    mainModel.getColorList().add(new Color(averageAnimalR, averageAnimalG, averageAnimalB));
-                    mainModel.getColorList().remove(0);
-                }
-            }
-
             mainView.updateView(mainModel);
             try {
-                Thread.sleep(200);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -103,7 +86,5 @@ public class MainController {
 
         }
     }
-
-
 
 }

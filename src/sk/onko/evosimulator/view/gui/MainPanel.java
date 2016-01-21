@@ -5,6 +5,7 @@ import sk.onko.evosimulator.model.MainModel;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by ondrej.janosik on 20/01/2016.
@@ -76,7 +77,7 @@ public class MainPanel extends JPanel implements UpdateableView {
 
         }
 
-        java.util.List<Color> colorList = model.getAllAverageColors();
+        List<Color> allAverageColors = model.getAllAverageColors();
 
         int averageAnimalR = model.getAverageAnimalR();
         int averageAnimalG = model.getAverageAnimalG();
@@ -84,16 +85,16 @@ public class MainPanel extends JPanel implements UpdateableView {
 
         int cyclesElapsed = model.getCyclesElapsed();
 
-        if (colorList.size() < 60) {
-            animalzGenMinus30.setBackground(colorList.get(0));
-            animalzGenMinus60.setBackground(colorList.get(0));
-            System.out.println(" Label gen-60 color changed to " + colorList.get(0));
+        if (allAverageColors.size() < 60) {
+            animalzGenMinus30.setBackground(allAverageColors.get(0));
+            animalzGenMinus60.setBackground(allAverageColors.get(0));
+            System.out.println(" Label gen-60 color changed to " + allAverageColors.get(0));
         }
 
-        if (colorList.size() > 60) {
-            animalzGenMinus30.setBackground(colorList.get(cyclesElapsed - 30));
-            animalzGenMinus60.setBackground(colorList.get(cyclesElapsed - 60));
-            System.out.println(" Label gen-60 color changed to " + colorList.get(cyclesElapsed - 60));
+        if (allAverageColors.size() > 60) {
+            animalzGenMinus30.setBackground(allAverageColors.get(cyclesElapsed - 30));
+            animalzGenMinus60.setBackground(allAverageColors.get(cyclesElapsed - 60));
+            System.out.println(" Label gen-60 color changed to " + allAverageColors.get(cyclesElapsed - 60));
         }
 
         try {

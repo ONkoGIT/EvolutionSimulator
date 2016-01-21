@@ -37,8 +37,8 @@ public class GraphPanel extends JPanel implements UpdateableView {
         int positionOfGraphMarker = 0;
 
         for (GraphMark graphMark : graphMarks) {
-            graphMark.setBackground(allAverageColors.get((positionOfGraphMarker * (sizeOfAllAverageColors / 50))));
-            graphMark.setYfromBottom(model.getAverageBreedChances().get((positionOfGraphMarker * (model.getAverageBreedChances().size() / 50))));
+            graphMark.setBackground(allAverageColors.get((positionOfGraphMarker * (sizeOfAllAverageColors / graphMarks.size()))));
+            graphMark.setYfromBottom(model.getAverageBreedChances().get((positionOfGraphMarker * (model.getAverageBreedChances().size() / graphMarks.size()))));
 
 
             positionOfGraphMarker++;

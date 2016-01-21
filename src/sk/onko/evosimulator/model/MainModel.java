@@ -13,12 +13,26 @@ import java.util.List;
  */
 public class MainModel {
 
+    private int cyclesElapsed;
+
+    //TODO remove old one-area code
     private Environment environment;
 
-    //Creature list
+    public WorldRegion[][] getWorldRegions() {
+        return worldRegions;
+    }
+
+    public void setWorldRegions(WorldRegion[][] worldRegions) {
+        this.worldRegions = worldRegions;
+    }
+
+    //TODO remove old one-area code, instead use Areas :
+    private WorldRegion[][] worldRegions;
+
+    //TODO remove old one-area code
     private List<Animal> animals;
 
-    private int cyclesElapsed;
+
 
     public int getCyclesElapsed() {
         return cyclesElapsed;
@@ -28,10 +42,12 @@ public class MainModel {
         this.cyclesElapsed = cyclesElapsed;
     }
 
+    //TODO remove old one-area code
     int averageAnimalR;
     int averageAnimalG;
     int averageAnimalB;
 
+    //TODO remove old one-area code
     public int getAverageAnimalR() {
         return averageAnimalR;
     }
@@ -44,6 +60,7 @@ public class MainModel {
         this.averageAnimalR = averageAnimalR;
     }
 
+    //TODO remove old one-area code
     public Environment getEnvironment() {
         return environment;
     }
@@ -92,14 +109,6 @@ public class MainModel {
         this.averageBreedChance = averageBreedChance;
     }
 
-    public List<Color> getColorList() {
-        return colorList;
-    }
-
-    public void setColorList(List<Color> colorList) {
-        this.colorList = colorList;
-    }
-
     public List<Color> getAllAverageColors() {
         return allAverageColors;
     }
@@ -120,7 +129,6 @@ public class MainModel {
 
     int averageBreedChance = 0;
 
-    List<Color> colorList = new ArrayList<Color>();
     List<Color> allAverageColors = new ArrayList<Color>();
     List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 

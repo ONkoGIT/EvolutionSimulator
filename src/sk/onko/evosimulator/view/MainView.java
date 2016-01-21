@@ -1,5 +1,6 @@
 package sk.onko.evosimulator.view;
 
+import sk.onko.evosimulator.factories.FrameFactory;
 import sk.onko.evosimulator.gui.GraphMark;
 import sk.onko.evosimulator.model.MainModel;
 import sk.onko.evosimulator.view.gui.*;
@@ -12,56 +13,37 @@ import java.util.*;
  */
 public class MainView implements UpdateableView {
 
-    java.util.List<GraphMark> graphMarks = new ArrayList<GraphMark>();
+    FrameFactory frameFactory = new FrameFactory();
+    List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 
-    //TODO move creation of frames somewhere else
-    JFrame f = new JFrame();
-    JFrame f2 = new JFrame();
-    JFrame f3 = new JFrame();
-    JFrame f4 = new JFrame();
+    JFrame mainFrame;
+    JFrame allAnimalColorsFrame = new JFrame();
+    JFrame allAverageColorsFrame = new JFrame();
+    JFrame trendGraphFrame = new JFrame();
 
     //TODO Somehow use interfaces for these components
     MainPanel mainPanel = new MainPanel();
-    GraphPanel graphPanel = new GraphPanel();
+    GraphPanel trendGraphPanel = new GraphPanel();
     AllAnimalColorsPanel allAnimalColorsPanel = new AllAnimalColorsPanel();
-    AverageColorsPanel averageColorsPanel = new AverageColorsPanel();
+    AverageColorsPanel allAverageColorsPanel = new AverageColorsPanel();
 
     public MainView() {
         createView();
     }
 
     private void createView() {
-        f.setLocation(200, 200);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setSize(500, 500);
-        f.setResizable(false);
-        f.setTitle("VIEW - Evolution simulation");
-        f.add(mainPanel);
-        f.setVisible(true);
 
-        f2.setLocation(200, 100);
-        f2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f2.setSize(1500, 100);
-        f2.setResizable(false);
-        f2.setTitle("VIEW - Color view of every animal");
-        f2.add(allAnimalColorsPanel);
-        f2.setVisible(true);
+        mainFrame = frameFactory.getMainFrame();
+        mainFrame.add(mainPanel);
 
-        f3.setLocation(200, 100);
-        f3.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f3.setSize(1500, 100);
-        f3.setResizable(false);
-        f3.setTitle("VIEW - Color evolution trend ");
-        f3.add(averageColorsPanel);
-        f3.setVisible(true);
+        trendGraphFrame = frameFactory.getTrendGraphFrame();
+        trendGraphFrame.add(trendGraphPanel);
 
-        f4.setLocation(200, 100);
-        f4.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f4.setSize(1500, 600);
-        f4.setResizable(false);
-        f4.setTitle("VIEW - Color evolution trend ");
-        f4.add(graphPanel);
-        f4.setVisible(true);
+        allAnimalColorsFrame = frameFactory.getAllAnimalColorsFrame();
+        allAnimalColorsFrame.add(allAnimalColorsPanel);
+
+        allAverageColorsFrame = frameFactory.getAllAverageColorsFrame();
+        allAverageColorsFrame.add(allAverageColorsPanel);
 
     }
 
@@ -72,12 +54,12 @@ public class MainView implements UpdateableView {
 
         allAnimalColorsPanel.updateView(model);
 
-        averageColorsPanel.updateView(model);
+        allAverageColorsPanel.updateView(model);
 
         int cyclesElapsed = model.getCyclesElapsed();
 
         if (cyclesElapsed % 50 == 0) {
-              graphPanel.updateView(model);
+              trendGraphPanel.updateView(model);
         }
 
     }
