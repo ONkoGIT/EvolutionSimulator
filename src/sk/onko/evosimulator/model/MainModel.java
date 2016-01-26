@@ -7,6 +7,7 @@ import sk.onko.evosimulator.gui.GraphMark;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ondrej.janosik on 19/01/2016.
@@ -18,16 +19,8 @@ public class MainModel {
     //TODO remove old one-area code
     private Environment environment;
 
-    public WorldRegion[][] getWorldRegions() {
-        return worldRegions;
-    }
+    private Map<Coordinates,WorldRegion> worldRegionMap;
 
-    public void setWorldRegions(WorldRegion[][] worldRegions) {
-        this.worldRegions = worldRegions;
-    }
-
-    //TODO remove old one-area code, instead use Areas :
-    private WorldRegion[][] worldRegions;
 
     //TODO remove old one-area code
     private List<Animal> animals;

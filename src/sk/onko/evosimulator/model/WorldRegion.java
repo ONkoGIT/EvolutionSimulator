@@ -11,6 +11,30 @@ import sk.onko.evosimulator.model.Population;
  */
 public class WorldRegion {
 
+    private enum EnvironmentType {
+        ARCTIC(new Color(252, 252, 252)),
+        DESERT(new Color(253,234,158)),
+        FOREST(new Color(0,154,0)),
+        PLAINS(new Color(204,204,0)),
+        OCEAN(new Color(0,0,204));
+
+        private Color color;
+
+        EnvironmentType(Color color){
+
+        };
+
+        public Color getColor() {
+            return color;
+        }
+
+        public void setColor(Color color) {
+            this.color = color;
+        }
+    }
+
+    private EnvironmentType environmentType;
+
     private Color regionColor;
 
     private List<Population> populationList;
@@ -33,5 +57,13 @@ public class WorldRegion {
 
     public void setRegionColor(Color regionColor) {
         this.regionColor = regionColor;
+    }
+
+    public EnvironmentType getEnvironmentType() {
+        return environmentType;
+    }
+
+    public void setEnvironmentType(EnvironmentType environmentType) {
+        this.environmentType = environmentType;
     }
 }
