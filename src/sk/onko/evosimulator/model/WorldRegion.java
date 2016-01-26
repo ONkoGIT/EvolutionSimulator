@@ -37,6 +37,24 @@ public class WorldRegion {
     private EnvironmentType environmentType;
 
     private Color regionColor;
+    private int inhabitantNumber;
+    private int plagueLevel;
+
+    public int getPlagueLevel() {
+        return plagueLevel;
+    }
+
+    public void setPlagueLevel(int plagueLevel) {
+        this.plagueLevel = plagueLevel;
+    }
+
+    public int getInhabitantNumber() {
+        return inhabitantNumber;
+    }
+
+    public void setInhabitantNumber(int inhabitantNumber) {
+        this.inhabitantNumber = inhabitantNumber;
+    }
 
     private List<Population> populationList;
 

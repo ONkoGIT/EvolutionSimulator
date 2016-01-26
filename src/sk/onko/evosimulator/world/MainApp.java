@@ -13,7 +13,11 @@ public class MainApp {
 
     public static void main(String[]args){
 
-        new MainController(MainModelFactory.getBasicMainModel(),new MainView());
+        MainModelFactory mainModelFactory = new MainModelFactory();
+
+        MainModel model = mainModelFactory.getBasicMainModel();
+        MainView mainView = new MainView(model);
+        new MainController(model,mainView).startTimeCycle();
 
     }
 

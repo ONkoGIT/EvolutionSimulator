@@ -17,21 +17,23 @@ public class MainView implements UpdateableView {
     List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 
     JFrame mainFrame;
-    JFrame allAnimalColorsFrame = new JFrame();
-    JFrame allAverageColorsFrame = new JFrame();
-    JFrame trendGraphFrame = new JFrame();
+    JFrame allAnimalColorsFrame;
+    JFrame allAverageColorsFrame;
+    JFrame trendGraphFrame;
+    JFrame mapFrame;
 
     //TODO Somehow use interfaces for these components
     MainPanel mainPanel = new MainPanel();
     GraphPanel trendGraphPanel = new GraphPanel();
     AllAnimalColorsPanel allAnimalColorsPanel = new AllAnimalColorsPanel();
     AverageColorsPanel allAverageColorsPanel = new AverageColorsPanel();
+    MapPanel mapPanel;
 
-    public MainView() {
-        createView();
+    public MainView(MainModel model) {
+        createView(model);
     }
 
-    private void createView() {
+    private void createView(MainModel model) {
 
         mainFrame = frameFactory.getMainFrame();
         mainFrame.add(mainPanel);
@@ -45,6 +47,10 @@ public class MainView implements UpdateableView {
         allAverageColorsFrame = frameFactory.getAllAverageColorsFrame();
         allAverageColorsFrame.add(allAverageColorsPanel);
 
+        mapFrame= frameFactory.getMapFrame();
+        mapPanel = new MapPanel(model);
+        mapFrame.add(mapPanel);
+
     }
 
     @Override
@@ -55,6 +61,8 @@ public class MainView implements UpdateableView {
         allAnimalColorsPanel.updateView(model);
 
         allAverageColorsPanel.updateView(model);
+
+        mapPanel.updateView(model);
 
         int cyclesElapsed = model.getCyclesElapsed();
 
