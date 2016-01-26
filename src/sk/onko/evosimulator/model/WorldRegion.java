@@ -21,6 +21,7 @@ public class WorldRegion {
         private Color color;
 
         EnvironmentType(Color color){
+            setColor(color);
 
         };
 
