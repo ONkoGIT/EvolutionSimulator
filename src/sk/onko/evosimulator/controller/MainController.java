@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -41,11 +42,11 @@ public class MainController {
         this.mainModel = mainModel;
         this.mainView = mainView;
 
-        startTimeCycle();
-
     }
 
-    private void startTimeCycle() {
+    public void startTimeCycle() {
+
+        long beginningOfCycleTime = System.currentTimeMillis();
         int cyclesElapsed = 0;
 
         while (cyclesElapsed <= 100000) {
@@ -83,6 +84,11 @@ public class MainController {
 
             cyclesElapsed++;
             mainModel.setCyclesElapsed(cyclesElapsed);
+
+            if(cyclesElapsed==1000){
+                long endOfCycleTime = System.currentTimeMillis();
+              System.out.println("1000 cycles elapsed, took " + (beginningOfCycleTime-endOfCycleTime) + " milliseconds") ;
+            }
 
         }
     }

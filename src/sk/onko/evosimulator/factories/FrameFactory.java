@@ -57,5 +57,17 @@ public class FrameFactory {
         return  allAverageColorsFrame;
     }
 
+    public JFrame getMapFrame(){
+        JFrame mapFrame = new JFrame();
+        mapFrame.setLocation(200, 100);
+        mapFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mapFrame.setSize(1200, 1200);
+        mapFrame.setResizable(false);
+        mapFrame.setTitle("Map");
+        //allAverageColorsFrame.add(allAverageColorsPanel);
+        mapFrame.setVisible(true);
+        return  mapFrame;
+    }
+
 
 }

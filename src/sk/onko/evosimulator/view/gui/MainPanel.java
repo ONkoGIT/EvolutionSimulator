@@ -88,13 +88,13 @@ public class MainPanel extends JPanel implements UpdateableView {
         if (allAverageColors.size() < 60) {
             animalzGenMinus30.setBackground(allAverageColors.get(0));
             animalzGenMinus60.setBackground(allAverageColors.get(0));
-            System.out.println(" Label gen-60 color changed to " + allAverageColors.get(0));
+           // System.out.println(" Label gen-60 color changed to " + allAverageColors.get(0));
         }
 
         if (allAverageColors.size() > 60) {
             animalzGenMinus30.setBackground(allAverageColors.get(cyclesElapsed - 30));
             animalzGenMinus60.setBackground(allAverageColors.get(cyclesElapsed - 60));
-            System.out.println(" Label gen-60 color changed to " + allAverageColors.get(cyclesElapsed - 60));
+           // System.out.println(" Label gen-60 color changed to " + allAverageColors.get(cyclesElapsed - 60));
         }
 
         try {
