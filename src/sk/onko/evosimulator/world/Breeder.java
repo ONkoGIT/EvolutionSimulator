@@ -1,7 +1,7 @@
 package sk.onko.evosimulator.world;
 
 import sk.onko.evosimulator.model.Animal;
-import sk.onko.evosimulator.model.Environment;
+import sk.onko.evosimulator.model.WorldRegion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,28 +13,28 @@ public class Breeder {
 
     public int plagueLevel;
 
-    public List<Animal> breed(List<Animal> animals, Environment environment) {
+    public List<Animal> breed(List<Animal> animals, WorldRegion region) {
 
-        plagueLevel = environment.getPlagueLevel();
+        plagueLevel = region.getPlagueLevel();
 
         List<Animal> newAnimals = new ArrayList<Animal>();
 
         plagueLevel= 0;
 
-        if (animals.size() >= 400 && animals.size() < 500) {
+        if (animals.size() >= 300 && animals.size() < 500) {
 
             plagueLevel = 1;
 
             System.out.println("- - - Plague level 1 - - -");
-        } else if (animals.size() >= 500 && animals.size() < 600) {
+        } else if (animals.size() >= 400 && animals.size() < 600) {
             plagueLevel = 2;
             System.out.println("- - - Plague level 2 - - -");
-        } else if (animals.size() >= 600) {
+        } else if (animals.size() >= 500) {
             plagueLevel = 3;
             System.out.println("- - - Plague level 3 - - -");
         }
 
-        environment.setPlagueLevel(plagueLevel);
+       region.setPlagueLevel(plagueLevel);
 
         for (Animal animal : animals) {
 

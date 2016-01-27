@@ -1,29 +1,26 @@
 package sk.onko.evosimulator.model;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
-
-import sk.onko.evosimulator.model.Population;
 
 /**
  * Created by Ondrej on 21.1.2016.
  */
 public class WorldRegion {
 
-    private enum EnvironmentType {
+
+    public enum EnvironmentType {
         ARCTIC(new Color(252, 252, 252)),
-        DESERT(new Color(253,234,158)),
-        FOREST(new Color(0,154,0)),
-        PLAINS(new Color(204,204,0)),
-        OCEAN(new Color(0,0,204));
+        DESERT(new Color(253, 234, 158)),
+        FOREST(new Color(0, 154, 0)),
+        PLAINS(new Color(204, 204, 0)),
+        OCEAN(new Color(68, 193, 255));
 
         private Color color;
 
-        EnvironmentType(Color color){
+        EnvironmentType(Color color) {
             setColor(color);
-
-        };
+        }
 
         public Color getColor() {
             return color;
@@ -36,9 +33,23 @@ public class WorldRegion {
 
     private EnvironmentType environmentType;
 
-    private Color regionColor;
+    private List<Population> populationList;
+
+    private List<PlantSpecies> plantSpeciesList;
+
+
+    private int temperature;
+    // private Color color;
     private int inhabitantNumber;
     private int plagueLevel;
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
 
     public int getPlagueLevel() {
         return plagueLevel;
@@ -56,8 +67,6 @@ public class WorldRegion {
         this.inhabitantNumber = inhabitantNumber;
     }
 
-    private List<Population> populationList;
-
     public int getPopulationPortion;
 
     public int getPlantPortion;
@@ -70,13 +79,15 @@ public class WorldRegion {
         this.populationList = populationList;
     }
 
-    public Color getRegionColor() {
-        return regionColor;
+    public Color getColor() {
+        return this.environmentType.getColor();
     }
 
-    public void setRegionColor(Color regionColor) {
+    /*
+    public void setColor(Color regionColor) {
         this.regionColor = regionColor;
     }
+    */
 
     public EnvironmentType getEnvironmentType() {
         return environmentType;
@@ -85,4 +96,13 @@ public class WorldRegion {
     public void setEnvironmentType(EnvironmentType environmentType) {
         this.environmentType = environmentType;
     }
+
+    public List<PlantSpecies> getPlantSpeciesList() {
+        return plantSpeciesList;
+    }
+
+    public void setPlantSpeciesList(List<PlantSpecies> plantSpeciesList) {
+        this.plantSpeciesList = plantSpeciesList;
+    }
+
 }

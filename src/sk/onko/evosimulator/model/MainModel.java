@@ -1,7 +1,5 @@
 package sk.onko.evosimulator.model;
 
-import sk.onko.evosimulator.factories.EnvironmentFactory;
-import sk.onko.evosimulator.factories.MainModelFactory;
 import sk.onko.evosimulator.gui.GraphMark;
 
 import java.awt.*;
@@ -16,16 +14,10 @@ public class MainModel {
 
     private int cyclesElapsed;
 
-    //TODO remove old one-area code
-    private Environment environment;
+    private int mapWidth;
+    private int mapHeight;
 
     private Map<Coordinates,WorldRegion> worldRegionMap;
-
-
-    //TODO remove old one-area code
-    private List<Animal> animals;
-
-
 
     public int getCyclesElapsed() {
         return cyclesElapsed;
@@ -35,55 +27,8 @@ public class MainModel {
         this.cyclesElapsed = cyclesElapsed;
     }
 
-    //TODO remove old one-area code
-    int averageAnimalR;
-    int averageAnimalG;
-    int averageAnimalB;
-
-    //TODO remove old one-area code
-    public int getAverageAnimalR() {
-        return averageAnimalR;
-    }
-
     public MainModel() {
 
-    }
-
-    public void setAverageAnimalR(int averageAnimalR) {
-        this.averageAnimalR = averageAnimalR;
-    }
-
-    //TODO remove old one-area code
-    public Environment getEnvironment() {
-        return environment;
-    }
-
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
-
-    public List<Animal> getAnimals() {
-        return animals;
-    }
-
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
-    }
-
-    public int getAverageAnimalG() {
-        return averageAnimalG;
-    }
-
-    public void setAverageAnimalG(int averageAnimalG) {
-        this.averageAnimalG = averageAnimalG;
-    }
-
-    public int getAverageAnimalB() {
-        return averageAnimalB;
-    }
-
-    public void setAverageAnimalB(int averageAnimalB) {
-        this.averageAnimalB = averageAnimalB;
     }
 
     public List<Integer> getAverageBreedChances() {
@@ -125,4 +70,27 @@ public class MainModel {
     List<Color> allAverageColors = new ArrayList<Color>();
     List<GraphMark> graphMarks = new ArrayList<GraphMark>();
 
+    public Map<Coordinates, WorldRegion> getWorldRegionMap() {
+        return worldRegionMap;
+    }
+
+    public void setWorldRegionMap(Map<Coordinates, WorldRegion> worldRegionMap) {
+        this.worldRegionMap = worldRegionMap;
+    }
+
+    public int getMapWidth() {
+        return mapWidth;
+    }
+
+    public void setMapWidth(int mapWidth) {
+        this.mapWidth = mapWidth;
+    }
+
+    public int getMapHeight() {
+        return mapHeight;
+    }
+
+    public void setMapHeight(int mapHeight) {
+        this.mapHeight = mapHeight;
+    }
 }

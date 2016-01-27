@@ -10,6 +10,8 @@ import java.util.List;
 /**
  * Created by ondrej.janosik on 20/01/2016.
  */
+
+@Deprecated
 public class MainPanel extends JPanel implements UpdateableView {
 
     JButton animalzCurrent = new JButton();
@@ -55,6 +57,11 @@ public class MainPanel extends JPanel implements UpdateableView {
         populationLabel.setVisible(true);
     }
 
+    @Override
+    public void updateView(MainModel model) {
+
+    }
+/*
     @Override
     public void updateView(MainModel model) {
         setBackground(model.getEnvironment().getColor());
@@ -109,6 +116,6 @@ public class MainPanel extends JPanel implements UpdateableView {
 
         generationNumberLabel.setText("Generation " + model.getCyclesElapsed());
 
-    }
+    }*/
 
 }

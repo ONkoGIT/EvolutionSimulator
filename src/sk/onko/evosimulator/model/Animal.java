@@ -4,8 +4,18 @@ package sk.onko.evosimulator.model;
  * Created by Ondrej on 12.1.2016.
  */
 public class Animal {
+    //RGB values of animals color (0-255)
+    private int R;
+    private int G;
+    private int B;
+
     private int breedChance = 50;
-    private int breedChanceWithoutPlague=50;
+    private int breedChanceWithoutPlague = 50;
+    private int furLevel = 130;
+
+    //TODO change default herbivore
+    private int carnivoreRatio = 0;
+    private int herbivoreRatio = 100;
 
     public Animal() {
         this.setR(150);
@@ -13,19 +23,18 @@ public class Animal {
         this.setB(0);
     }
 
-    //For copying
+    //For copying animals , when breeding
     public Animal(Animal animal) {
         this.R = animal.getR();
         this.G = animal.getG();
         this.B = animal.getB();
         this.breedChance = animal.getBreedChance();
         this.breedChanceWithoutPlague = animal.getBreedChanceWithoutPlague();
+        this.furLevel = animal.getFurLevel();
+        this.herbivoreRatio=animal.getHerbivoreRatio();
+        this.carnivoreRatio=animal.getCarnivoreRatio();
     }
 
-    //RGB values of animals color (0-255)
-    private int R;
-    private int G;
-    private int B;
 
     public int getR() {
         return R;
@@ -82,4 +91,40 @@ public class Animal {
         this.breedChanceWithoutPlague = breedChanceWithoutPlague;
     }
 
+    public int getFurLevel() {
+        return furLevel;
+    }
+
+    public void setFurLevel(int furLevel) {
+        this.furLevel = furLevel;
+    }
+
+    public int getCarnivoreRatio() {
+        return carnivoreRatio;
+    }
+
+    public void setCarnivoreRatio(int carnivoreRatio) {
+        if (carnivoreRatio >= 100) {
+            this.carnivoreRatio = 100;
+        } else
+            this.carnivoreRatio = carnivoreRatio;
+
+        this.herbivoreRatio = 100 - carnivoreRatio;
+
+    }
+
+    public int getHerbivoreRatio() {
+        return herbivoreRatio;
+    }
+
+    public void setHerbivoreRatio(int herbivoreRatio) {
+        if (herbivoreRatio >= 100) {
+            this.herbivoreRatio = 100;
+        } else
+            this.herbivoreRatio = herbivoreRatio;
+
+        this.carnivoreRatio = 100 - herbivoreRatio;
+    }
+
+    //TODO - validation function for setters
 }

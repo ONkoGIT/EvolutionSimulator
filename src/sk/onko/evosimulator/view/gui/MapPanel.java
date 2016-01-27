@@ -1,53 +1,78 @@
 package sk.onko.evosimulator.view.gui;
 
+import sk.onko.evosimulator.model.Coordinates;
 import sk.onko.evosimulator.model.MainModel;
-import sk.onko.evosimulator.model.WorldRegion;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Ondrej on 23.1.2016.
  */
 public class MapPanel extends JPanel implements UpdateableView {
 
-    private JPanel[][] worldRegionPanel;
-    private int mapWidth = 2;
-    private int mapHeight = 2;
+    private Map<Coordinates, RegionPanel> worldRegionPanelMap;
+    private int mapWidth;
+    private int mapHeight;
     private int mapTileWidth = 300;
     private int mapTileHeight = 300;
 
+
     public MapPanel(MainModel model) {
 
-        setSize(1200,1200);
+        setSize(1200, 1200);
         setLayout(null);
         setBackground(new Color(255, 255, 255));
 
+        mapWidth = model.getMapWidth();
+        mapHeight = model.getMapHeight();
 
-        //TODO get height and width of map in other, not fixed way
-        worldRegionPanel = new JPanel[mapWidth][mapHeight];
+        worldRegionPanelMap = new TreeMap<Coordinates, RegionPanel>();
 
+        Color regionColor;
         for (int x = 0; x <= (mapWidth - 1); x++) {
             for (int y = 0; y <= (mapHeight - 1); y++) {
-                worldRegionPanel[x][y]= new JPanel();
 
-                Color regionColor = model.getWorldRegions()[x][y].getRegionColor();
-                worldRegionPanel[x][y].setBackground(regionColor);
-                worldRegionPanel[x][y].setLayout(null);
-                worldRegionPanel[x][y].setBounds(x* mapTileWidth, y*mapTileHeight, mapTileWidth, mapTileHeight);
-                this.add(worldRegionPanel[x][y]);
-                worldRegionPanel[x][y].setVisible(true);
+                RegionPanel worldRegionPanel = new RegionPanel();
+
+                regionColor = model.getWorldRegionMap().get(new Coordinates(x, y)).getColor();
+                System.out.println("Color " + regionColor);
+                worldRegionPanel.setBackground(regionColor);
+
+                worldRegionPanel.setBounds(x * mapTileWidth, y * mapTileHeight, mapTileWidth, mapTileHeight);
+                this.add(worldRegionPanel);
+
+                worldRegionPanelMap.put(new Coordinates(x, y), worldRegionPanel);
 
             }
 
         }
 
-      setVisible(true);
+        setVisible(true);
 
     }
 
     @Override
     public void updateView(MainModel model) {
+
+        mapWidth = model.getMapWidth();
+        mapHeight = model.getMapHeight();
+
+        Color regionColor;
+        for (int x = 0; x <= (mapWidth - 1); x++) {
+            for (int y = 0; y <= (mapHeight - 1); y++) {
+
+                RegionPanel regionPanel = worldRegionPanelMap.get(new Coordinates(x, y));
+
+                int inhabitantNumber = model.getWorldRegionMap().get(new Coordinates(x, y)).getInhabitantNumber();
+
+                regionPanel.getTotalPopulationNumberLabel().setText("Population: " + inhabitantNumber);
+
+            }
+
+        }
 
         repaint();
 

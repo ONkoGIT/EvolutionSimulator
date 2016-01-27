@@ -29,7 +29,7 @@ public class GraphPanel extends JPanel implements UpdateableView {
 
     }
 
-    public void updateView(MainModel model) {
+    public void updateView(MainModel model) {/*
 
         int sizeOfAllAverageColors = model.getAllAverageColors().size();
         java.util.List<Color> allAverageColors = model.getAllAverageColors();
@@ -43,7 +43,7 @@ public class GraphPanel extends JPanel implements UpdateableView {
 
             positionOfGraphMarker++;
         }
-        this.repaint();
+        this.repaint();*/
 
     }
 

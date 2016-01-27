@@ -20,7 +20,7 @@ public class AllAnimalColorsPanel extends JPanel implements UpdateableView {
     }
 
     @Override
-    public void updateView(MainModel model){
+    public void updateView(MainModel model){/*
         int position = 0;
          removeAll();
 
@@ -45,7 +45,7 @@ public class AllAnimalColorsPanel extends JPanel implements UpdateableView {
 
         }
        repaint();
-
+*/
     }
 
 

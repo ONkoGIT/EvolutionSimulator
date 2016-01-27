@@ -1,4 +1,4 @@
-package sk.onko.evosimulator.controller;
+package sk.onko.evosimulator.model;
 
 /**
  * Created by Ondrej on 23.1.2016.

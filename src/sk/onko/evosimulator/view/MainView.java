@@ -35,8 +35,8 @@ public class MainView implements UpdateableView {
 
     private void createView(MainModel model) {
 
-        mainFrame = frameFactory.getMainFrame();
-        mainFrame.add(mainPanel);
+     //   mainFrame = frameFactory.getMainFrame();
+     //   mainFrame.add(mainPanel);
 
         trendGraphFrame = frameFactory.getTrendGraphFrame();
         trendGraphFrame.add(trendGraphPanel);
@@ -56,7 +56,8 @@ public class MainView implements UpdateableView {
     @Override
     public void updateView(MainModel model) {
 
-        mainPanel.updateView(model);
+        //TODO : mainPanel to be removed
+//        mainPanel.updateView(model);
 
         allAnimalColorsPanel.updateView(model);
 

@@ -1,7 +1,7 @@
 package sk.onko.evosimulator.world;
 
 import sk.onko.evosimulator.model.Animal;
-import sk.onko.evosimulator.model.Environment;
+import sk.onko.evosimulator.model.WorldRegion;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Mutator {
     public static final int MUTATION_RATE = 10;
 
     //Takes a set of unmutated animals and outputs mutated animals
-    public List<Animal> mutate(List<Animal> inputSet, Environment environment){
+    public List<Animal> mutate(List<Animal> inputSet, WorldRegion region){
 
         for (Animal animal : inputSet){
 
@@ -24,8 +24,9 @@ public class Mutator {
                 animal.setR((int)(animal.getR()+(Math.random()*8)-4));
                 animal.setG((int)(animal.getG()+(Math.random()*8))-4);
                 animal.setB((int)(animal.getB()+(Math.random()*8)-4));
+                animal.setFurLevel((int)(animal.getFurLevel()+(Math.random()*8)-4));
 
-                int newBreedChance = breedChanceCalculator.calculateBreedChance(animal,environment);
+                int newBreedChance = breedChanceCalculator.calculateBreedChance(animal,region);
 
                 animal.setBreedChance( newBreedChance );
                 animal.setBreedChanceWithoutPlague( newBreedChance );

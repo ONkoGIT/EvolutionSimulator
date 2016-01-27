@@ -24,7 +24,7 @@ public class AverageColorsPanel extends JPanel implements UpdateableView {
         removeAll();
         int position = 0;
 
-        System.out.println(" - - - Number of beings : " + model.getAnimals().size() + " - - -");
+       // System.out.println(" - - - Number of beings : " + model.getAnimals().size() + " - - -");
 
         for (Color color : model.getAllAverageColors()) {
 

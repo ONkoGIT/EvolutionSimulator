@@ -20,7 +20,6 @@ public class RegionFactory {
 
         WorldRegion worldRegion = new WorldRegion();
 
-        worldRegion.setRegionColor(new Color(R,G,B));
 
         List<Population> populationList = new ArrayList<Population>();
         populationList.add(populationFactory.getColoredPopulation(80,80,80));

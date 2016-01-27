@@ -1,12 +1,20 @@
 package sk.onko.evosimulator.model;
 
+import java.util.Collection;
+
 /**
  * Created by ondrej.janosik on 26/01/2016.
  */
-public class Coordinates {
+public class Coordinates implements Comparable<Coordinates> {
 
     private int x;
     private int y;
+
+
+    public Coordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public int getX() {
         return x;
@@ -44,4 +52,16 @@ public class Coordinates {
         return result;
     }
 
+
+    @Override
+    public int compareTo(Coordinates o) {
+
+        if (getX() > o.getX()) return 1;
+        else if (getY() > o.getY()) return 1;
+
+        if (getX() < o.getX()) return -1;
+        else if (getY() < o.getY()) return -1;
+
+        else return 0;
+    }
 }
