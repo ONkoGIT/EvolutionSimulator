@@ -7,13 +7,9 @@ import sk.onko.evosimulator.view.gui.UpdateableView;
 import sk.onko.evosimulator.world.Breeder;
 import sk.onko.evosimulator.world.Mutator;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Created by Ondrej on 12.1.2016.
@@ -46,7 +42,7 @@ public class MainController {
         long beginningOfCycleTime = System.currentTimeMillis();
         int cyclesElapsed = 0;
 
-        while (cyclesElapsed <= 100000) {
+        while (cyclesElapsed <= 10000000) {
 
             int worldPopulation = 0;
             //TUTO map
@@ -55,19 +51,19 @@ public class MainController {
                     WorldRegion currentRegion = mainModel.getWorldRegionMap().get(new Coordinates(x, y));
 
                     int regionPopulation = 0;
-                    for (Population population : currentRegion.getPopulationList()) {
+                    for (AnimalSpecies animalSpecies : currentRegion.getAnimalSpeciesList()) {
 
-                        regionPopulation += population.getAnimals().size();
+                        regionPopulation += animalSpecies.getAnimals().size();
 
-                        List<Animal> animalList = population.getAnimals();
+                        List<Animal> animalList = animalSpecies.getAnimals();
 
                         //Random mutations
 
                         List<Animal> mutatedAnimalList = mutator.mutate(animalList, currentRegion);
-                        population.setAnimals(mutatedAnimalList);
+                        animalSpecies.setAnimals(mutatedAnimalList);
 
                         //Breeding
-                        population.setAnimals(breeder.breed(population.getAnimals(), currentRegion));
+                        animalSpecies.setAnimals(breeder.breed(animalSpecies.getAnimals(), currentRegion));
 
                     }
 
@@ -78,7 +74,7 @@ public class MainController {
 
             }
 
-            if (worldPopulation >= 4000 || worldPopulation <= 0) {
+            if (worldPopulation >= 20000 || worldPopulation <= 0) {
                 System.out.println(" - - - Number of beings : " + worldPopulation + " - TOO HIGH/LOW. SIMULATION ENDING.");
                 System.exit(0);
 
@@ -99,7 +95,7 @@ public class MainController {
 
             mainView.updateView(mainModel);
             try {
-                Thread.sleep(200);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

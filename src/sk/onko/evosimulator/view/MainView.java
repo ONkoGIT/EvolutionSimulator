@@ -38,14 +38,14 @@ public class MainView implements UpdateableView {
      //   mainFrame = frameFactory.getMainFrame();
      //   mainFrame.add(mainPanel);
 
-        trendGraphFrame = frameFactory.getTrendGraphFrame();
-        trendGraphFrame.add(trendGraphPanel);
+       // trendGraphFrame = frameFactory.getTrendGraphFrame();
+      //  trendGraphFrame.add(trendGraphPanel);
 
-        allAnimalColorsFrame = frameFactory.getAllAnimalColorsFrame();
-        allAnimalColorsFrame.add(allAnimalColorsPanel);
+        //allAnimalColorsFrame = frameFactory.getAllAnimalColorsFrame();
+       // allAnimalColorsFrame.add(allAnimalColorsPanel);
 
-        allAverageColorsFrame = frameFactory.getAllAverageColorsFrame();
-        allAverageColorsFrame.add(allAverageColorsPanel);
+      //  allAverageColorsFrame = frameFactory.getAllAverageColorsFrame();
+      //  allAverageColorsFrame.add(allAverageColorsPanel);
 
         mapFrame= frameFactory.getMapFrame();
         mapPanel = new MapPanel(model);

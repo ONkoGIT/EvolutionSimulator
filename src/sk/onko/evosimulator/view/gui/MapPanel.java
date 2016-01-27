@@ -1,7 +1,9 @@
 package sk.onko.evosimulator.view.gui;
 
+import sk.onko.evosimulator.model.AnimalSpecies;
 import sk.onko.evosimulator.model.Coordinates;
 import sk.onko.evosimulator.model.MainModel;
+import sk.onko.evosimulator.model.WorldRegion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,9 +68,15 @@ public class MapPanel extends JPanel implements UpdateableView {
 
                 RegionPanel regionPanel = worldRegionPanelMap.get(new Coordinates(x, y));
 
-                int inhabitantNumber = model.getWorldRegionMap().get(new Coordinates(x, y)).getInhabitantNumber();
+                WorldRegion currentRegion = model.getWorldRegionMap().get(new Coordinates(x, y));
+
+                int inhabitantNumber = currentRegion.getInhabitantNumber();
+
+                AnimalSpecies species = currentRegion.getAnimalSpeciesList().get(0);
 
                 regionPanel.getTotalPopulationNumberLabel().setText("Population: " + inhabitantNumber);
+                regionPanel.getFurLevelLabel().setText("Fur level: " + species.getAverageFurLevel());
+                regionPanel.getPopulationAvgColorLabel().setBackground(species.getAverageColor());
 
             }
 

@@ -20,6 +20,8 @@ public class WorldRegion {
 
         EnvironmentType(Color color) {
             setColor(color);
+
+
         }
 
         public Color getColor() {
@@ -33,7 +35,7 @@ public class WorldRegion {
 
     private EnvironmentType environmentType;
 
-    private List<Population> populationList;
+    private List<AnimalSpecies> animalSpeciesList;
 
     private List<PlantSpecies> plantSpeciesList;
 
@@ -71,12 +73,12 @@ public class WorldRegion {
 
     public int getPlantPortion;
 
-    public List<Population> getPopulationList() {
-        return populationList;
+    public List<AnimalSpecies> getAnimalSpeciesList() {
+        return animalSpeciesList;
     }
 
-    public void setPopulationList(List<Population> populationList) {
-        this.populationList = populationList;
+    public void setAnimalSpeciesList(List<AnimalSpecies> animalSpeciesList) {
+        this.animalSpeciesList = animalSpeciesList;
     }
 
     public Color getColor() {

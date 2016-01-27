@@ -7,13 +7,16 @@ import java.util.List;
 /**
  * Created by Ondrej on 21.1.2016.
  */
-public class Population {
+public class AnimalSpecies {
+
+    private String speciesName;
 
     private List<Animal> animals;
 
     int averageAnimalR;
     int averageAnimalG;
     int averageAnimalB;
+int averageFurLevel;
 
     List<Integer> averageBreedChances = new ArrayList<Integer>();
 
@@ -76,5 +79,27 @@ public class Population {
 
     public void setAllAverageColors(List<Color> allAverageColors) {
         this.allAverageColors = allAverageColors;
+    }
+
+    public String getSpeciesName() {
+        return speciesName;
+    }
+
+    public void setSpeciesName(String speciesName) {
+        this.speciesName = speciesName;
+    }
+
+    public int getAverageFurLevel() {
+        return averageFurLevel;
+    }
+
+    public void setAverageFurLevel(int averageFurLevel) {
+        this.averageFurLevel = averageFurLevel;
+    }
+
+    public Color getAverageColor(){
+
+        return new Color(averageAnimalR,averageAnimalG,averageAnimalB);
+
     }
 }

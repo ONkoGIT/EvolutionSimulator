@@ -21,6 +21,7 @@ public class Breeder {
 
         plagueLevel= 0;
 
+
         if (animals.size() >= 300 && animals.size() < 500) {
 
             plagueLevel = 1;
@@ -53,7 +54,6 @@ public class Breeder {
 
 
             if (animal.getBreedChance() >= 100) {
-
 
                 int numberOfBirthedAnimals = animal.getBreedChance() / 100;
 

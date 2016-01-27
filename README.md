@@ -4,7 +4,7 @@
 
 <b>So far done :</b>
 - Animals are randomly mutating their color, and their breeding chances are bigger if their color is more similar to environment color.
-- Environment creates plague, if population is too big = weeds out the weak
+- Environment creates plague, if animalSpecies is too big = weeds out the weak
 
 <b>Goals for first release :</b>
 - Have a map of regions with distinct populations

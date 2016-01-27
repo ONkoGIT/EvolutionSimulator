@@ -18,6 +18,12 @@ public class BreedChanceCalculator {
         newBreedChance += getEnvironmentBonus(animal, region);
 
         //TODO eating of plants
+        if (!region.getPlantSpeciesList().isEmpty() &&  !region.getPlantSpeciesList().get(0).getPlants().isEmpty()) {
+            region.getPlantSpeciesList().get(0).getPlants().remove(0);
+        } else {
+            newBreedChance = 1;
+            System.out.println("Not enough plants in the region");
+        }
 
         return newBreedChance;
 
@@ -31,10 +37,10 @@ public class BreedChanceCalculator {
         //optimal line calculated by optimalTemperature= 50 + (-0.235 * fur)
         //You know, y = a + bx
 
-        int optimalTemperatureForFur = (50 + ((int)(-0.235*animal.getFurLevel())));
-        int temperatureBonus = Math.abs(optimalTemperatureForFur-region.getTemperature());
-        temperatureBonus = Math.abs(100 - temperatureBonus) ;
-        environmentBonus+=temperatureBonus;
+        int optimalTemperatureForFur = (50 + ((int) (-0.235 * animal.getFurLevel())));
+        int temperatureBonus = Math.abs(optimalTemperatureForFur - region.getTemperature());
+        temperatureBonus = Math.abs(100 - temperatureBonus);
+        environmentBonus += temperatureBonus;
 
         return environmentBonus;
     }

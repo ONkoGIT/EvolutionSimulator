@@ -2,8 +2,6 @@ package sk.onko.evosimulator.factories;
 
 import sk.onko.evosimulator.model.*;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -36,24 +34,31 @@ public class MainModelFactory {
                 switch (randomNumber) {
                     case 0:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.FOREST);
+                        currentRegion.setTemperature(20);
                         break;
                     case 1:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.ARCTIC);
+                        currentRegion.setTemperature(-10);
                         break;
                     case 2:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.OCEAN);
+                        currentRegion.setTemperature(10);
                         break;
                     case 3:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.DESERT);
+                        currentRegion.setTemperature(50);
                         break;
                     case 4:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.PLAINS);
+                        currentRegion.setTemperature(30);
                         break;
                     case 5:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.FOREST);
+                        currentRegion.setTemperature(20);
                         break;
                     case 6:
                         currentRegion.setEnvironmentType(WorldRegion.EnvironmentType.PLAINS);
+                        currentRegion.setTemperature(30);
                         break;
 
                     default:
@@ -62,12 +67,15 @@ public class MainModelFactory {
 
                 }
 
-                List<Population> populationList = new ArrayList<Population>();
+                //Generating animals
+                List<AnimalSpecies> animalSpeciesList = new ArrayList<AnimalSpecies>();
 
                 for (int populationNumber = 0; populationNumber < 1; populationNumber++) {
-                    Population population = new Population();
+                    AnimalSpecies animalSpecies = new AnimalSpecies();
 
                     List<Animal> animalList = new ArrayList<>();
+
+
                     for (int i = 0; i < 20; i++) {
                         Animal animal = new Animal();
                         animal.setR(80);
@@ -75,15 +83,39 @@ public class MainModelFactory {
                         animal.setB(50);
 
                         animalList.add(animal);
+
                     }
                     System.out.println("Animals created : " + animalList.size());
 
-                    population.setAnimals(animalList);
-                    populationList.add(population);
+
+                    animalSpecies.setAnimals(animalList);
+                    animalSpeciesList.add(animalSpecies);
+
+                }
+                currentRegion.setAnimalSpeciesList(animalSpeciesList);
+
+                //Generating plants
+                List<PlantSpecies> plantSpeciesList = new ArrayList<PlantSpecies>();
+
+                for (int plantSpeciesNumber = 0; plantSpeciesNumber < 1; plantSpeciesNumber++) {
+                    PlantSpecies plantSpecies = new PlantSpecies();
+
+                    List<Plant> plantList = new ArrayList<>();
+
+                    for (int i = 0; i < 20; i++) {
+                        Plant plant = new Plant();
+
+                        plantList.add(plant);
+                    }
+
+
+                    plantSpecies.setPlants(plantList);
+                    plantSpeciesList.add(plantSpecies);
 
                 }
 
-                currentRegion.setPopulationList(populationList);
+                currentRegion.setPlantSpeciesList(plantSpeciesList);
+
                 worldRegionMap.put(new Coordinates(x, y), currentRegion);
 
 

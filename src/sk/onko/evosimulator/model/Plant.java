@@ -11,6 +11,16 @@ public class Plant {
     private int Gloozane;
     private int Bloozene;
 
+    public Plant() {
+
+    }
+
+    //TODO clone constructor
+    public Plant(Plant plant) {
+
+    }
+
+
     public int getBloozene() {
         return Bloozene;
     }

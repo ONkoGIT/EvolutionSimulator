@@ -51,7 +51,7 @@ public class MainPanel extends JPanel implements UpdateableView {
         add(plagueLabel);
         plagueLabel.setVisible(true);
 
-        populationLabel.setText("Population :");
+        populationLabel.setText("AnimalSpecies :");
         populationLabel.setBounds(300, 430, 250, 30);
         add(populationLabel);
         populationLabel.setVisible(true);
@@ -66,7 +66,7 @@ public class MainPanel extends JPanel implements UpdateableView {
     public void updateView(MainModel model) {
         setBackground(model.getEnvironment().getColor());
 
-        populationLabel.setText("Population : " + model.getAnimals().size());
+        populationLabel.setText("AnimalSpecies : " + model.getAnimals().size());
 
         switch (model.getEnvironment().getPlagueLevel()) {
 

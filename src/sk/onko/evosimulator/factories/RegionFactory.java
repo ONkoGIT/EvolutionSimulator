@@ -1,10 +1,8 @@
 package sk.onko.evosimulator.factories;
 
-import sk.onko.evosimulator.model.Population;
+import sk.onko.evosimulator.model.AnimalSpecies;
 import sk.onko.evosimulator.model.WorldRegion;
 
-import java.awt.*;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +19,10 @@ public class RegionFactory {
         WorldRegion worldRegion = new WorldRegion();
 
 
-        List<Population> populationList = new ArrayList<Population>();
-        populationList.add(populationFactory.getColoredPopulation(80,80,80));
+        List<AnimalSpecies> animalSpeciesList = new ArrayList<AnimalSpecies>();
+        animalSpeciesList.add(populationFactory.getColoredPopulation(80,80,80));
 
-        worldRegion.setPopulationList(populationList);
+        worldRegion.setAnimalSpeciesList(animalSpeciesList);
 
         return  worldRegion;
 

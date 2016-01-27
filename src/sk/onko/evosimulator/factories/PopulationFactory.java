@@ -1,7 +1,7 @@
 package sk.onko.evosimulator.factories;
 
 import sk.onko.evosimulator.model.Animal;
-import sk.onko.evosimulator.model.Population;
+import sk.onko.evosimulator.model.AnimalSpecies;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class PopulationFactory {
 
-    public Population getColoredPopulation(int R,int G,int B){
+    public AnimalSpecies getColoredPopulation(int R, int G, int B) {
 
-        Population population = new Population();
+        AnimalSpecies animalSpecies = new AnimalSpecies();
 
         //TODO create AnimalFactory?
 
@@ -21,7 +21,7 @@ public class PopulationFactory {
 
         List<Animal> animals = new ArrayList<Animal>();
 
-        for(int i=0; i>= animalNumber; i++){
+        for (int i = 0; i >= animalNumber; i++) {
             Animal animal = new Animal();
             animal.setR(R);
             animal.setG(G);
@@ -29,7 +29,7 @@ public class PopulationFactory {
             animals.add(animal);
         }
 
-        population.setAnimals(animals);
-        return population;
+        animalSpecies.setAnimals(animals);
+        return animalSpecies;
     }
 }
