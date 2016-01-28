@@ -43,6 +43,7 @@ public class WorldRegion {
     private int temperature;
     // private Color color;
     private int inhabitantNumber;
+    private int plantNumber;
     private int plagueLevel;
 
     public int getTemperature() {
@@ -107,4 +108,11 @@ public class WorldRegion {
         this.plantSpeciesList = plantSpeciesList;
     }
 
+    public int getPlantNumber() {
+        return plantNumber;
+    }
+
+    public void setPlantNumber(int plantNumber) {
+        this.plantNumber = plantNumber;
+    }
 }

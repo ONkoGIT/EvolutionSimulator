@@ -11,7 +11,8 @@ import java.util.List;
  */
 public class RegionFactory {
 
-    private PopulationFactory populationFactory = new PopulationFactory();
+
+    private SpeciesFactory speciesFactory = new SpeciesFactory();
 
     //TODO add normal getters for regions, or random regions
     public WorldRegion getColoredRegion(int R, int G, int B){
@@ -20,7 +21,7 @@ public class RegionFactory {
 
 
         List<AnimalSpecies> animalSpeciesList = new ArrayList<AnimalSpecies>();
-        animalSpeciesList.add(populationFactory.getColoredPopulation(80,80,80));
+        animalSpeciesList.add(speciesFactory.getColoredPopulation(80,80,80));
 
         worldRegion.setAnimalSpeciesList(animalSpeciesList);
 

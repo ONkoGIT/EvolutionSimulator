@@ -76,19 +76,34 @@ public class ModelUpdater {
                     //plants growing
                     List<Plant> newPlantList = new ArrayList<>();
                     int totalNumberOfNewPlants = 0;
+                    System.out.println( plantSpecies.getPlants().size() + " plants currently.");
+
                     for (Plant plant : plantSpecies.getPlants()) {
 
                         if (totalNumberOfNewPlants < 1000) {
-                            newPlantList.add(new Plant(plant));
-                            newPlantList.add(new Plant(plant));
-                            totalNumberOfNewPlants++;
-                            totalNumberOfNewPlants++;
+
+                            if (Math.random()<=0.6){
+                                newPlantList.add(new Plant(plant));
+                                totalNumberOfNewPlants++;
+                            }
+
                         }
 
 
                     }
 
-                    System.out.println(totalNumberOfNewPlants + " new plants created.");
+                    //Generating plants, regardless of actual plants. Even, if zero - prevents extinction
+                    for (int i=0;i<60;i++){
+
+                        if (Math.random()<=0.3){
+                            newPlantList.add(new Plant());
+                            totalNumberOfNewPlants++;
+                        }
+                    }
+
+
+
+                   // System.out.println(totalNumberOfNewPlants + " new plants created.");
                     plantSpecies.setPlants(newPlantList);
 
                 }

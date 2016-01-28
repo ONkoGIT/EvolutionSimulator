@@ -7,6 +7,7 @@ import sk.onko.evosimulator.model.WorldRegion;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,8 +19,8 @@ public class MapPanel extends JPanel implements UpdateableView {
     private Map<Coordinates, RegionPanel> worldRegionPanelMap;
     private int mapWidth;
     private int mapHeight;
-    private int mapTileWidth = 300;
-    private int mapTileHeight = 300;
+    private int mapTileWidth = 250;
+    private int mapTileHeight = 250;
 
 
     public MapPanel(MainModel model) {
@@ -31,11 +32,14 @@ public class MapPanel extends JPanel implements UpdateableView {
         mapWidth = model.getMapWidth();
         mapHeight = model.getMapHeight();
 
-        worldRegionPanelMap = new TreeMap<Coordinates, RegionPanel>();
+        worldRegionPanelMap = new Hashtable<>();
 
         Color regionColor;
         for (int x = 0; x <= (mapWidth - 1); x++) {
             for (int y = 0; y <= (mapHeight - 1); y++) {
+
+               // System.out.println("RegionPanel created at " + x + "|" + y);
+
 
                 RegionPanel worldRegionPanel = new RegionPanel();
 
@@ -72,11 +76,17 @@ public class MapPanel extends JPanel implements UpdateableView {
 
                 int inhabitantNumber = currentRegion.getInhabitantNumber();
 
+                int plantNumber = currentRegion.getPlantNumber();
+
                 AnimalSpecies species = currentRegion.getAnimalSpeciesList().get(0);
 
+             //   System.out.println("Getting panel from coords X:" + x + " Y:" + y);
+                regionPanel.getPopulationNameLabel().setText("Species : " + species.getSpeciesName());
                 regionPanel.getTotalPopulationNumberLabel().setText("Population: " + inhabitantNumber);
                 regionPanel.getFurLevelLabel().setText("Fur level: " + species.getAverageFurLevel());
                 regionPanel.getPopulationAvgColorLabel().setBackground(species.getAverageColor());
+                regionPanel.getTotalPlantNumberLabel().setText("Plants: " + plantNumber);
+
 
             }
 

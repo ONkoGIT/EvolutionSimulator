@@ -68,13 +68,22 @@ public class MainController {
                     }
 
                     currentRegion.setInhabitantNumber(regionPopulation);
+
+                    int regionPlantNumber = 0;
+                    for (PlantSpecies plantSpecies : currentRegion.getPlantSpeciesList()) {
+                        regionPlantNumber = plantSpecies.getPlants().size();
+                    }
+
+                    currentRegion.setPlantNumber(regionPlantNumber);
+
+
                     worldPopulation += regionPopulation;
                 }
 
 
             }
 
-            if (worldPopulation >= 20000 || worldPopulation <= 0) {
+            if (worldPopulation >= 40000 || worldPopulation <= 0) {
                 System.out.println(" - - - Number of beings : " + worldPopulation + " - TOO HIGH/LOW. SIMULATION ENDING.");
                 System.exit(0);
 
@@ -95,7 +104,7 @@ public class MainController {
 
             mainView.updateView(mainModel);
             try {
-                Thread.sleep(10);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

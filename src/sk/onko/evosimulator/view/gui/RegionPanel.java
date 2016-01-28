@@ -16,8 +16,9 @@ public class RegionPanel extends JPanel {
     JLabel furLevelLabel = new JLabel("Average fur level:");
     JLabel populationAvgColorTextLabel = new JLabel("Average color of species:");
     JLabel populationAvgColorLabel = new JLabel();
-  //  private List<JLabel> populationNameLabels = new ArrayList<>();
-  //  private List<JLabel> populationAverageColorLabels = new ArrayList<>();
+    JLabel totalPlantNumberLabel = new JLabel("Plants:");
+    //  private List<JLabel> populationNameLabels = new ArrayList<>();
+    //  private List<JLabel> populationAverageColorLabels = new ArrayList<>();
 
 
     public RegionPanel() {
@@ -33,17 +34,21 @@ public class RegionPanel extends JPanel {
         populationNameLabel.setVisible(true);
 
         furLevelLabel.setBounds(10, 70, 200, 50);
-        this.add(    furLevelLabel);
+        this.add(furLevelLabel);
         furLevelLabel.setVisible(true);
 
         populationAvgColorTextLabel.setBounds(10, 90, 200, 50);
-        this.add( populationAvgColorTextLabel);
+        this.add(populationAvgColorTextLabel);
         populationAvgColorTextLabel.setVisible(true);
 
         populationAvgColorLabel.setBounds(10, 140, 50, 50);
         this.add(populationAvgColorLabel);
         populationAvgColorLabel.setOpaque(true);
         populationAvgColorLabel.setVisible(true);
+
+        totalPlantNumberLabel.setBounds(10, 200, 200, 50);
+        this.add(totalPlantNumberLabel);
+        totalPlantNumberLabel.setVisible(true);
     }
 
 
@@ -77,5 +82,13 @@ public class RegionPanel extends JPanel {
 
     public void setFurLevelLabel(JLabel furLevelLabel) {
         this.furLevelLabel = furLevelLabel;
+    }
+
+    public JLabel getTotalPlantNumberLabel() {
+        return totalPlantNumberLabel;
+    }
+
+    public void setTotalPlantNumberLabel(JLabel totalPlantNumberLabel) {
+        this.totalPlantNumberLabel = totalPlantNumberLabel;
     }
 }

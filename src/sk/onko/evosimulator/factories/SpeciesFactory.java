@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * Created by Ondrej on 21.1.2016.
  */
-public class PopulationFactory {
+public class SpeciesFactory
+{
 
     public AnimalSpecies getColoredPopulation(int R, int G, int B) {
 
@@ -30,6 +31,7 @@ public class PopulationFactory {
         }
 
         animalSpecies.setAnimals(animals);
+        animalSpecies.setSpeciesName("Defaultoid");
         return animalSpecies;
     }
 }

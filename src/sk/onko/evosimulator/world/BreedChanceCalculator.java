@@ -21,7 +21,7 @@ public class BreedChanceCalculator {
         if (!region.getPlantSpeciesList().isEmpty() &&  !region.getPlantSpeciesList().get(0).getPlants().isEmpty()) {
             region.getPlantSpeciesList().get(0).getPlants().remove(0);
         } else {
-            newBreedChance = 1;
+            newBreedChance = 5;
             System.out.println("Not enough plants in the region");
         }
 

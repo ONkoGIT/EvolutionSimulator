@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class MainModelFactory {
     private RegionFactory regionFactory = new RegionFactory();
-    private int mapWidth = 2;
-    private int mapHeight = 2;
+    private int mapWidth = 3;
+    private int mapHeight = 3;
 
     public MainModel getBasicMainModel() {
 
@@ -20,11 +20,14 @@ public class MainModelFactory {
         mainModel.setMapWidth(mapWidth);
         mainModel.setMapHeight(mapHeight);
 
+        //TODO evaluate collection type
         Map<Coordinates, WorldRegion> worldRegionMap = new HashMap<Coordinates, WorldRegion>();
 
-        for (int x = 0; x <= mainModel.getMapWidth(); x++) {
-            for (int y = 0; y <= mainModel.getMapHeight(); y++) {
+        for (int x = 0; x <= (mapWidth - 1); x++) {
+            for (int y = 0; y <= (mapHeight - 1); y++) {
 
+
+                //TODO Use factory for creating region
                 WorldRegion currentRegion = new WorldRegion();
                 currentRegion.setTemperature(25);
 
@@ -75,6 +78,8 @@ public class MainModelFactory {
 
                     List<Animal> animalList = new ArrayList<>();
 
+                    animalSpecies.setSpeciesName("Defaultoid");
+
 
                     for (int i = 0; i < 20; i++) {
                         Animal animal = new Animal();
@@ -108,7 +113,6 @@ public class MainModelFactory {
                         plantList.add(plant);
                     }
 
-
                     plantSpecies.setPlants(plantList);
                     plantSpeciesList.add(plantSpecies);
 
@@ -117,7 +121,6 @@ public class MainModelFactory {
                 currentRegion.setPlantSpeciesList(plantSpeciesList);
 
                 worldRegionMap.put(new Coordinates(x, y), currentRegion);
-
 
             }
         }
