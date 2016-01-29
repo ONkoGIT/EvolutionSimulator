@@ -20,20 +20,20 @@ public class Breeder {
         List<Animal> newAnimals = new ArrayList<Animal>();
 
         plagueLevel= 0;
-/*
 
-        if (animals.size() >= 300 && animals.size() < 500) {
+
+        if (animals.size() >= 300 && animals.size() < 400) {
 
             plagueLevel = 1;
 
             System.out.println("- - - Plague level 1 - - -");
-        } else if (animals.size() >= 400 && animals.size() < 600) {
+        } else if (animals.size() >= 400 && animals.size() < 500) {
             plagueLevel = 2;
             System.out.println("- - - Plague level 2 - - -");
         } else if (animals.size() >= 500) {
             plagueLevel = 3;
             System.out.println("- - - Plague level 3 - - -");
-        }*/
+        }
 
        region.setPlagueLevel(plagueLevel);
 

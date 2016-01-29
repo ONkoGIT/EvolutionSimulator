@@ -9,7 +9,7 @@ import java.util.List;
 public class WorldRegion {
 
 
-    public enum EnvironmentType {
+    public static enum EnvironmentType {
         ARCTIC(new Color(252, 252, 252)),
         DESERT(new Color(253, 234, 158)),
         FOREST(new Color(0, 154, 0)),
