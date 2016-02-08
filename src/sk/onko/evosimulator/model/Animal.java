@@ -8,14 +8,17 @@ public class Animal {
     private int R;
     private int G;
     private int B;
+    private int furLevel = 130;
+    private int size = 130;
+    private int claws = 130;
 
     private int breedChance = 50;
     private int breedChanceWithoutPlague = 50;
-    private int furLevel = 130;
+
 
     //TODO change default herbivore
-    private int carnivoreRatio = 0;
-    private int herbivoreRatio = 100;
+    private int carnivoreRatio = 40;
+    private int herbivoreRatio = 60;
 
     public Animal() {
         this.setR(150);
@@ -31,8 +34,10 @@ public class Animal {
         this.breedChance = animal.getBreedChance();
         this.breedChanceWithoutPlague = animal.getBreedChanceWithoutPlague();
         this.furLevel = animal.getFurLevel();
-        this.herbivoreRatio=animal.getHerbivoreRatio();
-        this.carnivoreRatio=animal.getCarnivoreRatio();
+        this.herbivoreRatio = animal.getHerbivoreRatio();
+        this.carnivoreRatio = animal.getCarnivoreRatio();
+        this.size = animal.getSize();
+        this.claws = animal.getClaws();
     }
 
 
@@ -41,12 +46,7 @@ public class Animal {
     }
 
     public void setR(int r) {
-        if (r < 0) {
-            R = 0;
-        } else if (r > 255) {
-            R = 255;
-        } else
-            R = r;
+        R = from0To255(r);
     }
 
     public int getG() {
@@ -54,12 +54,7 @@ public class Animal {
     }
 
     public void setG(int g) {
-        if (g < 0) {
-            G = 0;
-        } else if (g > 255) {
-            G = 255;
-        } else
-            G = g;
+        G = from0To255(g);
     }
 
     public int getB() {
@@ -67,12 +62,7 @@ public class Animal {
     }
 
     public void setB(int b) {
-        if (b < 0) {
-            B = 0;
-        } else if (b > 255) {
-            B = 255;
-        } else
-            B = b;
+        B = from0To255(b);
     }
 
     public int getBreedChance() {
@@ -96,11 +86,27 @@ public class Animal {
     }
 
     public void setFurLevel(int furLevel) {
-        this.furLevel = furLevel;
+        this.furLevel = from0To255(furLevel);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = from0To255(size);
     }
 
     public int getCarnivoreRatio() {
         return carnivoreRatio;
+    }
+
+    public int getClaws() {
+        return claws;
+    }
+
+    public void setClaws(int claws) {
+        this.claws = from0To255(claws);
     }
 
     public void setCarnivoreRatio(int carnivoreRatio) {
@@ -126,5 +132,16 @@ public class Animal {
         this.carnivoreRatio = 100 - herbivoreRatio;
     }
 
-    //TODO - validation function for setters
+
+    //Validation for setters
+    private int from0To255(int number) {
+        if (number < 0) {
+            return 0;
+        } else if (number > 255) {
+            return 255;
+        } else
+            return number;
+
+    }
+
 }

@@ -32,7 +32,7 @@ public class MainModelFactory {
                 //Generating animals
                 List<AnimalSpecies> animalSpeciesList = new ArrayList<AnimalSpecies>();
 
-                for (int populationNumber = 0; populationNumber < 1; populationNumber++) {
+                for (int populationNumber = 0; populationNumber < 2; populationNumber++) {
                     AnimalSpecies animalSpecies = new AnimalSpecies();
 
                     List<Animal> animalList = new ArrayList<>();

@@ -19,7 +19,7 @@ public class Breeder {
 
         List<Animal> newAnimals = new ArrayList<Animal>();
 
-        plagueLevel= 0;
+        plagueLevel = 0;
 
 
         if (animals.size() >= 300 && animals.size() < 400) {
@@ -35,7 +35,7 @@ public class Breeder {
             System.out.println("- - - Plague level 3 - - -");
         }
 
-       region.setPlagueLevel(plagueLevel);
+        region.setPlagueLevel(plagueLevel);
 
         for (Animal animal : animals) {
 
@@ -66,7 +66,7 @@ public class Breeder {
                     newAnimals.add(new Animal(animal));
                 }
 
-            } else if (Math.random() * 100 <= animal.getBreedChance() % 100) {
+            } else if (animal.getBreedChance() >= 0 && Math.random() * 100 <= animal.getBreedChance() % 100) {
                 newAnimals.add(new Animal(animal));
             }
 

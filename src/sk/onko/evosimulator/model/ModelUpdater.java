@@ -30,6 +30,7 @@ public class ModelUpdater {
                     int averageAnimalB = 0;
                     int averageBreedChance = 0;
                     int averageFurLevel = 0;
+                    int averageClaws = 0;
 
                     for (Animal animal : animalSpecies.getAnimals()) {
 
@@ -38,6 +39,7 @@ public class ModelUpdater {
                         averageAnimalB += animal.getB();
 
                         averageFurLevel += animal.getFurLevel();
+                        averageClaws += animal.getClaws();
 
                         averageBreedChance += animal.getBreedChanceWithoutPlague();
 
@@ -54,20 +56,26 @@ public class ModelUpdater {
                     }
 
 
-                    if(animalSpecies.getAnimals().size()!=0){
+                    if (animalSpecies.getAnimals().size() != 0) {
                         averageAnimalR /= animalSpecies.getAnimals().size();
                         averageAnimalG /= animalSpecies.getAnimals().size();
                         averageAnimalB /= animalSpecies.getAnimals().size();
 
                         averageFurLevel /= animalSpecies.getAnimals().size();
+
+                        averageClaws /= animalSpecies.getAnimals().size();
+
                     }
 
 
 
-                    animalSpecies.setAverageFurLevel(averageFurLevel);
                     animalSpecies.setAverageAnimalR(averageAnimalR);
                     animalSpecies.setAverageAnimalG(averageAnimalG);
                     animalSpecies.setAverageAnimalB(averageAnimalB);
+
+                    animalSpecies.setAverageFurLevel(averageFurLevel);
+
+                    animalSpecies.setAverageClaws(averageClaws);
                 }
 
                 //plant stuff for particular region
@@ -76,39 +84,35 @@ public class ModelUpdater {
                     //plants growing
                     List<Plant> newPlantList = new ArrayList<>();
                     int totalNumberOfNewPlants = 0;
-                    System.out.println( plantSpecies.getPlants().size() + " plants currently.");
+                 //   System.out.println(plantSpecies.getPlants().size() + " plants currently.");
 
                     for (Plant plant : plantSpecies.getPlants()) {
 
                         if (totalNumberOfNewPlants < 1000) {
 
-                            if (Math.random()<=0.6){
+                            if (Math.random() <= 0.6) {
                                 newPlantList.add(new Plant(plant));
                                 totalNumberOfNewPlants++;
                             }
 
                         }
 
-
                     }
 
                     //Generating plants, regardless of actual plants. Even, if zero - prevents extinction
-                    for (int i=0;i<60;i++){
+                    int randomNumberOfPlants = (int) (Math.random() * 200);
+                    for (int i = 0; i < randomNumberOfPlants; i++) {
 
-                        if (Math.random()<=0.3){
-                            newPlantList.add(new Plant());
-                            totalNumberOfNewPlants++;
-                        }
+                        newPlantList.add(new Plant());
+
                     }
+                    totalNumberOfNewPlants += randomNumberOfPlants;
 
-
-
-                   // System.out.println(totalNumberOfNewPlants + " new plants created.");
+                    // System.out.println(totalNumberOfNewPlants + " new plants created.");
                     plantSpecies.setPlants(newPlantList);
 
                 }
             }
-
         }
     }
 

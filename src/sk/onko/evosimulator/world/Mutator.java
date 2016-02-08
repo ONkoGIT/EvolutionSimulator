@@ -17,6 +17,9 @@ public class Mutator {
     //Takes a set of unmutated animals and outputs mutated animals
     public List<Animal> mutate(List<Animal> inputSet, WorldRegion region){
 
+        /* BUG */
+        //TODO
+
         for (Animal animal : inputSet){
 
             if ((Math.random()*100) <= MUTATION_RATE ){
@@ -25,6 +28,7 @@ public class Mutator {
                 animal.setG((int)(animal.getG()+(Math.random()*8))-4);
                 animal.setB((int)(animal.getB()+(Math.random()*8)-4));
                 animal.setFurLevel((int)(animal.getFurLevel()+(Math.random()*8)-4));
+                animal.setClaws((int)(animal.getClaws()+(Math.random()*8)-4));
 
                 int newBreedChance = breedChanceCalculator.calculateBreedChance(animal,region);
 

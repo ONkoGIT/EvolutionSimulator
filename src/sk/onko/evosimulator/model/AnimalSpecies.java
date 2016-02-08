@@ -16,7 +16,8 @@ public class AnimalSpecies {
     int averageAnimalR;
     int averageAnimalG;
     int averageAnimalB;
-int averageFurLevel;
+    int averageFurLevel;
+    int averageClaws;
 
     List<Integer> averageBreedChances = new ArrayList<Integer>();
 
@@ -97,9 +98,17 @@ int averageFurLevel;
         this.averageFurLevel = averageFurLevel;
     }
 
-    public Color getAverageColor(){
+    public Color getAverageColor() {
 
-        return new Color(averageAnimalR,averageAnimalG,averageAnimalB);
+        return new Color(averageAnimalR, averageAnimalG, averageAnimalB);
 
+    }
+
+    public int getAverageClaws() {
+        return averageClaws;
+    }
+
+    public void setAverageClaws(int averageClaws) {
+        this.averageClaws = averageClaws;
     }
 }

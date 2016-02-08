@@ -104,7 +104,7 @@ public class MainController {
 
             mainView.updateView(mainModel);
             try {
-                Thread.sleep(5);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
