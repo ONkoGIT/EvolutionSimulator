@@ -2,6 +2,7 @@ package sk.onko.evosimulator.world;
 
 
 import sk.onko.evosimulator.controller.MainController;
+import sk.onko.evosimulator.controller.SpeciesClassifier;
 import sk.onko.evosimulator.factories.MainModelFactory;
 import sk.onko.evosimulator.model.MainModel;
 import sk.onko.evosimulator.view.MainView;
@@ -20,7 +21,4 @@ public class MainApp {
         new MainController(model,mainView).startTimeCycle();
 
     }
-
-
-
 }

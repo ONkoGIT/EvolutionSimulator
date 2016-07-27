@@ -5,6 +5,15 @@ package sk.onko.evosimulator.model;
  */
 public class Animal {
     //RGB values of animals color (0-255)
+
+
+    private String speciesCode = "";
+    //Time that this animal spent classified as new species,
+    //after it passes certain number, it is officially classified as new species
+
+    private int generationsInNewSpecies;
+
+
     private int R;
     private int G;
     private int B;
@@ -27,6 +36,7 @@ public class Animal {
     }
 
     //For copying animals , when breeding
+    //TODO : always keep this up to date
     public Animal(Animal animal) {
         this.R = animal.getR();
         this.G = animal.getG();
@@ -38,6 +48,8 @@ public class Animal {
         this.carnivoreRatio = animal.getCarnivoreRatio();
         this.size = animal.getSize();
         this.claws = animal.getClaws();
+        this.speciesCode = animal.getSpeciesCode();
+        this.generationsInNewSpecies = animal.getGenerationsInNewSpecies();
     }
 
 
@@ -132,6 +144,21 @@ public class Animal {
         this.carnivoreRatio = 100 - herbivoreRatio;
     }
 
+    public String getSpeciesCode() {
+        return speciesCode;
+    }
+
+    public void setSpeciesCode(String speciesCode) {
+        this.speciesCode = speciesCode;
+    }
+
+    public int getGenerationsInNewSpecies() {
+        return generationsInNewSpecies;
+    }
+
+    public void setGenerationsInNewSpecies(int generationsInNewSpecies) {
+        this.generationsInNewSpecies = generationsInNewSpecies;
+    }
 
     //Validation for setters
     private int from0To255(int number) {
@@ -141,7 +168,6 @@ public class Animal {
             return 255;
         } else
             return number;
-
     }
 
 }

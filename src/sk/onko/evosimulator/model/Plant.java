@@ -20,7 +20,6 @@ public class Plant {
 
     }
 
-
     public int getBloozene() {
         return Bloozene;
     }

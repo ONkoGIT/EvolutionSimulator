@@ -10,7 +10,6 @@ public class Coordinates implements Comparable<Coordinates> {
     private int x;
     private int y;
 
-
     public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
@@ -51,7 +50,6 @@ public class Coordinates implements Comparable<Coordinates> {
         result = 31 * result + y;
         return result;
     }
-
 
     @Override
     public int compareTo(Coordinates o) {

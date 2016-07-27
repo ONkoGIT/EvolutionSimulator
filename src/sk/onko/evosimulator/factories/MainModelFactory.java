@@ -32,29 +32,39 @@ public class MainModelFactory {
                 //Generating animals
                 List<AnimalSpecies> animalSpeciesList = new ArrayList<AnimalSpecies>();
 
-                for (int populationNumber = 0; populationNumber < 2; populationNumber++) {
-                    AnimalSpecies animalSpecies = new AnimalSpecies();
+                for (int populationNumber = 0; populationNumber <= 2; populationNumber++) {
 
-                    List<Animal> animalList = new ArrayList<>();
+                    if (populationNumber == 1) {
+                        animalSpeciesList.add(speciesFactory.getGrizzlyBears());
+                        continue;
+                    }
 
-                    animalSpecies.setSpeciesName("Defaultoid");
+                    if (populationNumber == 2) {
+                        animalSpeciesList.add(speciesFactory.getElephants(150));
+                        continue;
+                    }
 
+                    if (populationNumber == 0) {
+                        AnimalSpecies animalSpecies = new AnimalSpecies();
+                        animalSpecies.setSpeciesName("Defaultoid");
 
-                    for (int i = 0; i < 20; i++) {
-                        Animal animal = new Animal();
-                        animal.setR(80);
-                        animal.setG(200);
-                        animal.setB(50);
+                        List<Animal> animalList = new ArrayList<>();
 
-                        animalList.add(animal);
+                        for (int i = 0; i < 20; i++) {
+                            Animal animal = new Animal();
+                            animal.setR(80);
+                            animal.setG(200);
+                            animal.setB(50);
+                            animalList.add(animal);
+                    }
+
+                        System.out.println("Animals created : " + animalList.size());
+
+                        animalSpecies.setAnimals(animalList);
+                        animalSpeciesList.add(animalSpecies);
+                        continue;
 
                     }
-                    System.out.println("Animals created : " + animalList.size());
-
-
-                    animalSpecies.setAnimals(animalList);
-                    animalSpeciesList.add(animalSpecies);
-
                 }
                 currentRegion.setAnimalSpeciesList(animalSpeciesList);
 
@@ -67,18 +77,14 @@ public class MainModelFactory {
                     List<Plant> plantList = new ArrayList<>();
 
                     for (int i = 0; i < 20; i++) {
-                        Plant plant = new Plant();
-
-                        plantList.add(plant);
+                        plantList.add(new Plant());
                     }
 
                     plantSpecies.setPlants(plantList);
                     plantSpeciesList.add(plantSpecies);
-
                 }
 
                 currentRegion.setPlantSpeciesList(plantSpeciesList);
-
                 worldRegionMap.put(new Coordinates(x, y), currentRegion);
 
             }

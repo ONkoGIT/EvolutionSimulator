@@ -7,5 +7,5 @@ import sk.onko.evosimulator.model.MainModel;
  */
 public interface UpdateableView {
 
-    public void updateView(MainModel model);
+    void updateView(MainModel model);
 }

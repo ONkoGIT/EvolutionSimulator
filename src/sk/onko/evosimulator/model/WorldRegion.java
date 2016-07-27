@@ -1,7 +1,9 @@
 package sk.onko.evosimulator.model;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ondrej on 21.1.2016.
@@ -9,7 +11,7 @@ import java.util.List;
 public class WorldRegion {
 
 
-    public static enum EnvironmentType {
+    public enum EnvironmentType {
         ARCTIC(new Color(252, 252, 252)),
         DESERT(new Color(253, 234, 158)),
         FOREST(new Color(0, 154, 0)),
@@ -20,8 +22,6 @@ public class WorldRegion {
 
         EnvironmentType(Color color) {
             setColor(color);
-
-
         }
 
         public Color getColor() {
@@ -34,6 +34,8 @@ public class WorldRegion {
     }
 
     private EnvironmentType environmentType;
+
+    private Map<String,AnimalSpecies> animalSpeciesMap = new HashMap<>();
 
     private List<AnimalSpecies> animalSpeciesList;
 
@@ -114,5 +116,13 @@ public class WorldRegion {
 
     public void setPlantNumber(int plantNumber) {
         this.plantNumber = plantNumber;
+    }
+
+    public Map<String, AnimalSpecies> getAnimalSpeciesMap() {
+        return animalSpeciesMap;
+    }
+
+    public void setAnimalSpeciesMap(Map<String, AnimalSpecies> animalSpeciesMap) {
+        this.animalSpeciesMap = animalSpeciesMap;
     }
 }

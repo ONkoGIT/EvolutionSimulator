@@ -5,14 +5,17 @@ import sk.onko.evosimulator.model.MainModel;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
 
 /**
  * Created by Ondrej on 6.2.2016.
  */
 
 //TODO: Add to RegionPanel
-public class SpeciesPanel extends JPanel implements UpdateableView{
+public class SpeciesPanel extends JPanel implements UpdateableView {
 
+    private Image grizzlyBackground = Toolkit.getDefaultToolkit().createImage("Images/Grizzly.png");
     private JLabel nameAndNumberLabel = new JLabel("Species name");
     private JLabel averageColorLabel = new JLabel("Color:");
     private JLabel averageColorSquareLabel = new JLabel();
@@ -20,16 +23,15 @@ public class SpeciesPanel extends JPanel implements UpdateableView{
 
 
     public SpeciesPanel() {
-        this.setBorder( BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+        this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
         this.setOpaque(true);
         this.setBackground(Color.DARK_GRAY);
         this.setLayout(null);
 
 
-
         nameAndNumberLabel.setForeground(Color.WHITE);
-        nameAndNumberLabel.setBounds(10,0,200,20);
+        nameAndNumberLabel.setBounds(10, 0, 200, 20);
         this.add(nameAndNumberLabel);
 
 
@@ -38,15 +40,14 @@ public class SpeciesPanel extends JPanel implements UpdateableView{
         averageColorSquareLabel.setForeground(Color.WHITE);
 
         statsLabel.setForeground(Color.WHITE);
-        statsLabel.setBounds(10, 20,200,20);
+        statsLabel.setBounds(10, 20, 200, 20);
         this.add(statsLabel);
 
         averageColorSquareLabel.setOpaque(true);
-        averageColorSquareLabel.setBounds(150,10,30,30);
+        averageColorSquareLabel.setBounds(150, 10, 30, 30);
         this.add(averageColorSquareLabel);
 
         this.setVisible(true);
-
 
     }
 
@@ -85,7 +86,12 @@ public class SpeciesPanel extends JPanel implements UpdateableView{
     @Override
     public void updateView(MainModel model) {
 
+    }
 
+    @Override
+    protected void paintComponent(Graphics g) {
 
+        super.paintComponent(g);
+        g.drawImage(grizzlyBackground, 0, 0, null);
     }
 }

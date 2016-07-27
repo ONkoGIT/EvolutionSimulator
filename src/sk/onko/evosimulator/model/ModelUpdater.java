@@ -37,7 +37,6 @@ public class ModelUpdater {
                         averageAnimalR += animal.getR();
                         averageAnimalG += animal.getG();
                         averageAnimalB += animal.getB();
-
                         averageFurLevel += animal.getFurLevel();
                         averageClaws += animal.getClaws();
 
@@ -52,29 +51,21 @@ public class ModelUpdater {
                         //  mainModel.setAverageBreedChance(averageBreedChance);
                         //   mainModel.getAverageBreedChances().add(averageBreedChance);
 
-
                     }
-
 
                     if (animalSpecies.getAnimals().size() != 0) {
                         averageAnimalR /= animalSpecies.getAnimals().size();
                         averageAnimalG /= animalSpecies.getAnimals().size();
                         averageAnimalB /= animalSpecies.getAnimals().size();
-
                         averageFurLevel /= animalSpecies.getAnimals().size();
-
                         averageClaws /= animalSpecies.getAnimals().size();
 
                     }
 
-
-
                     animalSpecies.setAverageAnimalR(averageAnimalR);
                     animalSpecies.setAverageAnimalG(averageAnimalG);
                     animalSpecies.setAverageAnimalB(averageAnimalB);
-
                     animalSpecies.setAverageFurLevel(averageFurLevel);
-
                     animalSpecies.setAverageClaws(averageClaws);
                 }
 
@@ -94,23 +85,19 @@ public class ModelUpdater {
                                 newPlantList.add(new Plant(plant));
                                 totalNumberOfNewPlants++;
                             }
-
                         }
-
                     }
 
                     //Generating plants, regardless of actual plants. Even, if zero - prevents extinction
                     int randomNumberOfPlants = (int) (Math.random() * 200);
                     for (int i = 0; i < randomNumberOfPlants; i++) {
-
                         newPlantList.add(new Plant());
-
                     }
+
                     totalNumberOfNewPlants += randomNumberOfPlants;
-
                     // System.out.println(totalNumberOfNewPlants + " new plants created.");
-                    plantSpecies.setPlants(newPlantList);
 
+                    plantSpecies.setPlants(newPlantList);
                 }
             }
         }

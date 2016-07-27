@@ -2,10 +2,11 @@ package sk.onko.evosimulator.controller;
 
 import sk.onko.evosimulator.model.*;
 import sk.onko.evosimulator.gui.GraphMark;
+import sk.onko.evosimulator.utils.EvoLogger;
+import sk.onko.evosimulator.utils.SimulationSettings;
 import sk.onko.evosimulator.view.MainView;
 import sk.onko.evosimulator.view.gui.UpdateableView;
-import sk.onko.evosimulator.world.Breeder;
-import sk.onko.evosimulator.world.Mutator;
+import sk.onko.evosimulator.world.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,107 +18,87 @@ import java.util.List;
 public class MainController {
 
     private MainModel mainModel;
-    private ModelUpdater modelUpdater = new ModelUpdater();
-
     public UpdateableView mainView;
 
     protected List<Animal> beings = new ArrayList<Animal>();
     protected Mutator mutator = new Mutator();
+    protected BreedChanceCalculator breedChanceCalculator = new BreedChanceCalculator();
     protected Breeder breeder = new Breeder();
+    protected PlantGrower plantGrower = new PlantGrower();
+    protected RegionCalculator regionCalculator = new RegionCalculator();
+    protected AnimalTravel animalTravel = new AnimalTravel();
+    protected FitnessCalculator fitnessCalculator = new FitnessCalculator();
+    protected AnimalFeeder animalFeeder = new AnimalFeeder();
+    protected PlagueMaker plagueMaker = new PlagueMaker();
+    protected SpeciesClassifier speciesClassifier = new SpeciesClassifier();
 
-    List<Integer> averageBreedChances = new ArrayList<Integer>();
-
-    List<Color> allAverageColors = new ArrayList<Color>();
-    List<GraphMark> graphMarks = new ArrayList<GraphMark>();
+    int cyclesElapsed = 0;
+    long beginningOfCycleTime = 0;
 
     public MainController(MainModel mainModel, MainView mainView) {
-
         this.mainModel = mainModel;
         this.mainView = mainView;
-
     }
 
     public void startTimeCycle() {
+        beginningOfCycleTime = System.currentTimeMillis();
 
-        long beginningOfCycleTime = System.currentTimeMillis();
-        int cyclesElapsed = 0;
-
-        while (cyclesElapsed <= 10000000) {
-
+        while (cyclesElapsed <= SimulationSettings.MAX_NUM_OF_CYCLES) {
             int worldPopulation = 0;
-            //TUTO map
+
             for (int x = 0; x < mainModel.getMapWidth(); x++) {
                 for (int y = 0; y < mainModel.getMapHeight(); y++) {
                     WorldRegion currentRegion = mainModel.getWorldRegionMap().get(new Coordinates(x, y));
-
-                    int regionPopulation = 0;
-                    for (AnimalSpecies animalSpecies : currentRegion.getAnimalSpeciesList()) {
-
-                        regionPopulation += animalSpecies.getAnimals().size();
-
-                        List<Animal> animalList = animalSpecies.getAnimals();
-
-                        //Random mutations
-
-                        List<Animal> mutatedAnimalList = mutator.mutate(animalList, currentRegion);
-                        animalSpecies.setAnimals(mutatedAnimalList);
-
-                        //Breeding
-                        animalSpecies.setAnimals(breeder.breed(animalSpecies.getAnimals(), currentRegion));
-
-                    }
-
-                    currentRegion.setInhabitantNumber(regionPopulation);
-
-                    int regionPlantNumber = 0;
-                    for (PlantSpecies plantSpecies : currentRegion.getPlantSpeciesList()) {
-                        regionPlantNumber = plantSpecies.getPlants().size();
-                    }
-
-                    currentRegion.setPlantNumber(regionPlantNumber);
-
-
-                    worldPopulation += regionPopulation;
+                    processRegion(currentRegion);
+                    worldPopulation += currentRegion.getInhabitantNumber();
                 }
-
-
             }
-
-            if (worldPopulation >= 40000 || worldPopulation <= 0) {
-                System.out.println(" - - - Number of beings : " + worldPopulation + " - TOO HIGH/LOW. SIMULATION ENDING.");
-                System.exit(0);
-
-            } else {
-                System.out.println(" - - - Starting time cycle number " + cyclesElapsed + " - - -");
-                System.out.println(" - - - World population is " + worldPopulation + " - - -");
-            }
-
-            //TODO this changes mainModel fields, not modelUpdaters - make it more clear
-            //  modelUpdater.resetAverageValues(mainModel);
-
-            //TODO this changes mainModel fields, not modelUpdaters - make it more clear
-            modelUpdater.calculateAverageValuesNEW(mainModel);
-
-            //model update
-            //   mainModel.setAverageBreedChance(mainModel.getAverageBreedChance() / mainModel.getAnimals().size());
-            //  mainModel.getAverageBreedChances().add(mainModel.getAverageBreedChance());
+            endSimulationIfWorldPopulationTooHigh(worldPopulation);
 
             mainView.updateView(mainModel);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             cyclesElapsed++;
             mainModel.setCyclesElapsed(cyclesElapsed);
+            sleepFor(SimulationSettings.SLEEP_TIME_AFTER_CYCLE);
+            if (EvoLogger.loggingTimePassedForCycleNumber) logTimePassedForCycleNumber(1000);
+        }
 
-            if (cyclesElapsed == 1000) {
-                long endOfCycleTime = System.currentTimeMillis();
-                System.out.println("1000 cycles elapsed, took " + (beginningOfCycleTime - endOfCycleTime) + " milliseconds");
-            }
+        if (EvoLogger.loggingStatisticsAfterEnd) EvoLogger.logStatisticsAfterEnd();
+    }
 
+    private void processRegion(WorldRegion currentRegion){
+        currentRegion = mutator.mutate(currentRegion);
+        currentRegion = fitnessCalculator.calculateFitness(currentRegion);
+        currentRegion = animalFeeder.feedAnimals(currentRegion);
+        currentRegion = breeder.breed(currentRegion);
+        currentRegion = plantGrower.growPlants(currentRegion);
+        currentRegion = speciesClassifier.recalculateAnimalSpecies(currentRegion);
+        currentRegion = regionCalculator.calculateStats(currentRegion);
+        currentRegion = plagueMaker.managePlagues(currentRegion);
+    }
+
+    private void sleepFor(int milliseconds){
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
+    private void endSimulationIfWorldPopulationTooHigh(int worldPopulation){
+        if (worldPopulation >= SimulationSettings.MAX_NUM_OF_BEINGS || worldPopulation <= 0) {
+            System.out.println(" - - - Number of beings : " + worldPopulation + " - TOO HIGH/LOW. SIMULATION ENDING.");
+            if (EvoLogger.loggingStatisticsAfterEnd) EvoLogger.logStatisticsAfterEnd();
+            System.exit(0);
+        } else {
+            if (EvoLogger.loggingCycleNumbers) System.out.println(" - - - Starting time cycle number " + cyclesElapsed + " - - -");
+            if (EvoLogger.loggingWorldPopulation) System.out.println(" - - - World population is " + worldPopulation + " - - -");
+        }
+    }
+
+    private void logTimePassedForCycleNumber(int cycleNumberToLog){
+        if (cyclesElapsed == cycleNumberToLog) {
+            long endOfCycleTime = System.currentTimeMillis();
+            System.out.println(cycleNumberToLog + " cycles elapsed, took " + (beginningOfCycleTime - endOfCycleTime) + " milliseconds");
+        }
+    }
 }

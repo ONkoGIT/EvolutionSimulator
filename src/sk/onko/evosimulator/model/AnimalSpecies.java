@@ -7,9 +7,10 @@ import java.util.List;
 /**
  * Created by Ondrej on 21.1.2016.
  */
-public class AnimalSpecies {
+public class AnimalSpecies implements Comparable<AnimalSpecies> {
 
     private String speciesName;
+    private String speciesCode;
 
     private List<Animal> animals;
 
@@ -24,7 +25,6 @@ public class AnimalSpecies {
     int averageBreedChance = 0;
 
     List<Color> allAverageColors = new ArrayList<Color>();
-
 
     public List<Animal> getAnimals() {
         return animals;
@@ -99,16 +99,48 @@ public class AnimalSpecies {
     }
 
     public Color getAverageColor() {
-
         return new Color(averageAnimalR, averageAnimalG, averageAnimalB);
 
     }
-
     public int getAverageClaws() {
         return averageClaws;
     }
 
     public void setAverageClaws(int averageClaws) {
         this.averageClaws = averageClaws;
+    }
+
+    public String getSpeciesCode() {
+        return speciesCode;
+    }
+
+    public void setSpeciesCode(String speciesCode) {
+        this.speciesCode = speciesCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AnimalSpecies that = (AnimalSpecies) o;
+
+        return speciesCode.equals(that.speciesCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return speciesCode.hashCode();
+    }
+
+    @Override
+    public int compareTo(AnimalSpecies other) {
+        if (this.getAnimals().size() > other.getAnimals().size()) {
+            return 1;
+        } else if (this.getAnimals().size() < other.getAnimals().size()) {
+            return -1;
+        }
+
+        return 0;
     }
 }

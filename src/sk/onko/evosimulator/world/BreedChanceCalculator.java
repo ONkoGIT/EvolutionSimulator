@@ -10,7 +10,6 @@ public class BreedChanceCalculator {
 
     private FightClub fightClub = new FightClub();
 
-
     public int calculateBreedChance(Animal animal, WorldRegion region) {
 
         // Zero or negative value means animal is dead (by hunt for example)
@@ -41,7 +40,6 @@ public class BreedChanceCalculator {
 
         } else {
 
-
             //TODO : Hunting, high priority, since this is bullshit now - everyone eats the second species
 
             //Can it find any pray in the region ? From other species
@@ -62,15 +60,11 @@ public class BreedChanceCalculator {
                     newBreedChance = newBreedChance / 2;
                     System.out.println("Hunt not successful");
                     animal.setHerbivoreRatio(animal.getHerbivoreRatio() + 1);
-
                 }
 
             } else {
-
                 newBreedChance = newBreedChance / 2;
                 System.out.println("No prey found");
-
-
             }
 
         }

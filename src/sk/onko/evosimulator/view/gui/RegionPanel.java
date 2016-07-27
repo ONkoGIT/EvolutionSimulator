@@ -8,9 +8,8 @@ import javax.swing.border.EtchedBorder;
  */
 public class RegionPanel extends JPanel {
 
-
     private RegionInfoPanel regionInfoPanel = new RegionInfoPanel();
-    private SpeciesPanel[] speciesPanels = {new SpeciesPanel(), new SpeciesPanel()};
+    private SpeciesPanel[] speciesPanels = {new SpeciesPanel(), new SpeciesPanel(), new SpeciesPanel()};
     private JLabel totalPopulationNumberLabel = new JLabel("Population:");
     JLabel populationNameLabel = new JLabel("Species:");
     JLabel furLevelLabel = new JLabel("Average fur level:");
@@ -19,7 +18,6 @@ public class RegionPanel extends JPanel {
     JLabel totalPlantNumberLabel = new JLabel("Plants:");
     //  private List<JLabel> populationNameLabels = new ArrayList<>();
     //  private List<JLabel> populationAverageColorLabels = new ArrayList<>();
-
 
     public RegionPanel() {
         this.setLayout(null);
@@ -30,13 +28,11 @@ public class RegionPanel extends JPanel {
 
         this.setBorder(BorderFactory.createCompoundBorder(raisedBevel, loweredbevel));
 
-
         int componentNumber = 0;
 
         regionInfoPanel.setSize(200, 50);
         this.add(regionInfoPanel);
         regionInfoPanel.setLocation(10, (componentNumber * regionInfoPanel.getHeight()) + 10 + (10 * componentNumber));
-
 
         componentNumber++;
 
@@ -44,7 +40,6 @@ public class RegionPanel extends JPanel {
 
             //TODO
             //speciesPanel.setSize(this.getWidth() - 20, this.getHeight() / 4);
-
 
             speciesPanel.setSize(200, 50);
             speciesPanel.setLocation(10, (componentNumber * speciesPanel.getHeight()) + 10 + (10 * componentNumber));
@@ -70,10 +65,10 @@ public class RegionPanel extends JPanel {
         populationAvgColorTextLabel.setVisible(true);
         */
 
-     //   populationAvgColorLabel.setBounds(10, 140, 50, 50);
-     //   this.add(populationAvgColorLabel);
-     //   populationAvgColorLabel.setOpaque(true);
-     //   populationAvgColorLabel.setVisible(true);
+        //   populationAvgColorLabel.setBounds(10, 140, 50, 50);
+        //   this.add(populationAvgColorLabel);
+        //   populationAvgColorLabel.setOpaque(true);
+        //   populationAvgColorLabel.setVisible(true);
 
         totalPlantNumberLabel.setBounds(10, 200, 200, 50);
         this.add(totalPlantNumberLabel);

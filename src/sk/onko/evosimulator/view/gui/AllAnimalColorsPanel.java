@@ -16,7 +16,6 @@ public class AllAnimalColorsPanel extends JPanel implements UpdateableView {
         setLayout(null);
         setBackground(new Color(0, 0, 0));
         setVisible(true);
-
     }
 
     @Override

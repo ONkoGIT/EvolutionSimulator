@@ -6,18 +6,17 @@ import sk.onko.evosimulator.model.Animal;
  * Created by Ondrej on 6.2.2016.
  */
 public class FightClub {
+    FitnessCalculator fitnessCalculator = new FitnessCalculator();
 
     //TODO comparison between animals
+    //TODO bonuses for colors, fur etc apply only once and at appropriate places
     public static boolean hunt(Animal hunter, Animal prey) {
+        int hunterScore = 0;
+        int preyScore = 0;
 
-        int hunterScore = 122 + prey.getClaws();
-        int preyScore = (int) (Math.random() * 255) + prey.getClaws();
+        hunterScore = 122 + prey.getClaws();
+        preyScore = (int) (Math.random() * 255) + prey.getClaws();
 
-        if (hunterScore > preyScore) {
-            return true;
-        } else
-            return false;
-
-
+        return hunterScore > preyScore;
     }
 }
