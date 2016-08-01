@@ -11,7 +11,9 @@ import java.util.List;
 public class RegionCalculator {
     public WorldRegion calculateStats(WorldRegion worldRegion) {
 
+
         int inhabitantNumber = 0;
+        int deadAnimals = 0;
 
         for (AnimalSpecies animalSpecies : worldRegion.getAnimalSpeciesList()) {
 
@@ -36,30 +38,28 @@ public class RegionCalculator {
                     int averageClaws = 0;
 
                     for (Animal animal : animalSpecies.getAnimals()) {
-
                         averageAnimalR += animal.getR();
                         averageAnimalG += animal.getG();
                         averageAnimalB += animal.getB();
-
                         averageFurLevel += animal.getFurLevel();
                         averageClaws += animal.getClaws();
 
-                        averageBreedChance += animal.getBreedChanceWithoutPlague();
+                        if(animal.getBreedChanceWithoutPlague()>=0){
+                            averageBreedChance += animal.getBreedChanceWithoutPlague();
+                        } else deadAnimals++;
 
                         //TODO 3 implement average color histories for populations
 
-                        averageBreedChance = averageBreedChance / animalSpecies.getAnimals().size();
                     }
 
                     if (animalSpecies.getAnimals().size() != 0) {
-                        averageAnimalR /= animalSpecies.getAnimals().size();
-                        averageAnimalG /= animalSpecies.getAnimals().size();
-                        averageAnimalB /= animalSpecies.getAnimals().size();
-
-                        averageFurLevel /= animalSpecies.getAnimals().size();
-
-                        averageClaws /= animalSpecies.getAnimals().size();
-
+                        int animalSize = animalSpecies.getAnimals().size() - deadAnimals;
+                        averageAnimalR /= animalSize;
+                        averageAnimalG /= animalSize;
+                        averageAnimalB /= animalSize;
+                        averageFurLevel /= animalSize;
+                        averageClaws /= animalSize;
+                        averageBreedChance /= animalSize;
                     }
 
                     animalSpecies.setAverageAnimalR(averageAnimalR);
@@ -67,6 +67,7 @@ public class RegionCalculator {
                     animalSpecies.setAverageAnimalB(averageAnimalB);
                     animalSpecies.setAverageFurLevel(averageFurLevel);
                     animalSpecies.setAverageClaws(averageClaws);
+                    animalSpecies.setAverageBreedChance(averageBreedChance);
                 }
         return worldRegion;
     }

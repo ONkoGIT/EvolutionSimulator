@@ -17,6 +17,7 @@ public class ModelUpdater {
     }
 */
 
+    @Deprecated
     public void calculateAverageValuesNEW(MainModel mainModel) {
 
         for (int x = 0; x < mainModel.getMapWidth(); x++) {

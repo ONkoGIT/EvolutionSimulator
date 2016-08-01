@@ -1,18 +1,20 @@
 package sk.onko.evosimulator.model;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * Created by Ondrej on 12.1.2016.
  */
 public class Animal {
     //RGB values of animals color (0-255)
 
-
     private String speciesCode = "";
     //Time that this animal spent classified as new species,
     //after it passes certain number, it is officially classified as new species
 
     private int generationsInNewSpecies;
-
 
     private int R;
     private int G;
@@ -23,6 +25,9 @@ public class Animal {
 
     private int breedChance = 50;
     private int breedChanceWithoutPlague = 50;
+
+    private String causeOfDeath;
+    private Map<Integer, String> evolutionHistory = new TreeMap<Integer, String>();
 
 
     //TODO change default herbivore
@@ -50,6 +55,8 @@ public class Animal {
         this.claws = animal.getClaws();
         this.speciesCode = animal.getSpeciesCode();
         this.generationsInNewSpecies = animal.getGenerationsInNewSpecies();
+        this.causeOfDeath = animal.getCauseOfDeath();
+        this.evolutionHistory = animal.getEvolutionHistory();
     }
 
 
@@ -170,4 +177,19 @@ public class Animal {
             return number;
     }
 
+    public String getCauseOfDeath() {
+        return causeOfDeath;
+    }
+
+    public void setCauseOfDeath(String causeOfDeath) {
+        this.causeOfDeath = causeOfDeath;
+    }
+
+    public Map<Integer, String> getEvolutionHistory() {
+        return evolutionHistory;
+    }
+
+    public void setEvolutionHistory(Map<Integer, String> evolutionHistory) {
+        this.evolutionHistory = evolutionHistory;
+    }
 }

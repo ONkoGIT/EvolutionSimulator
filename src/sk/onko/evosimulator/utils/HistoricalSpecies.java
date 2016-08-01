@@ -27,4 +27,51 @@ public class HistoricalSpecies {
         this.averageBreedChance = animalSpecies.getAverageBreedChance();
     }
 
+    public String getSpeciesCode() {
+        return speciesCode;
+    }
+
+    public void setSpeciesCode(String speciesCode) {
+        this.speciesCode = speciesCode;
+    }
+
+    public String getSpeciesName() {
+        return speciesName;
+    }
+
+    public void setSpeciesName(String speciesName) {
+        this.speciesName = speciesName;
+    }
+
+    public Color getAverageColor() {
+        return averageColor;
+    }
+
+    public void setAverageColor(Color averageColor) {
+        this.averageColor = averageColor;
+    }
+
+    public int getAverageFurLevel() {
+        return averageFurLevel;
+    }
+
+    public void setAverageFurLevel(int averageFurLevel) {
+        this.averageFurLevel = averageFurLevel;
+    }
+
+    public int getAverageClaws() {
+        return averageClaws;
+    }
+
+    public void setAverageClaws(int averageClaws) {
+        this.averageClaws = averageClaws;
+    }
+
+    public int getAverageBreedChance() {
+        return averageBreedChance;
+    }
+
+    public void setAverageBreedChance(int averageBreedChance) {
+        this.averageBreedChance = averageBreedChance;
+    }
 }

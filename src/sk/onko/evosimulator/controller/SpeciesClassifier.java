@@ -511,6 +511,7 @@ public class SpeciesClassifier {
         } else {
             if(EvoLogger.loggingSpeciesChanges) System.out.println("Species change from " + animal.getSpeciesCode() + " to : " + speciesCode);
 
+            animal.getEvolutionHistory().put(MainController.cyclesElapsed, speciesCode);
             animal.setSpeciesCode(speciesCode);
             animal.setGenerationsInNewSpecies(0);
         }

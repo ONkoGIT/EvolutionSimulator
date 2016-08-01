@@ -1,5 +1,7 @@
 package sk.onko.evosimulator.utils;
 
+import sk.onko.evosimulator.model.Animal;
+
 /**
  * Created by Ondrej on 22.7.2016.
  */
@@ -15,5 +17,14 @@ public class EvoLogger {
         System.out.println("Number of mutations: " + EvoStatistics.numOfMutations);
         System.out.println("Number of animals eaten: " + EvoStatistics.numOfAnimalsEaten);
         System.out.println("Number of plants eaten: " + EvoStatistics.numOfPlantsEaten);
+    }
+
+    public static String evolutionHistoryForAnimal(Animal animal){
+        System.out.println("EvolitionHistory: " + animal.getEvolutionHistory().toString());
+        String stringToReturn = "";
+        for(Integer cycle : animal.getEvolutionHistory().keySet()){            stringToReturn += "Cycle: " + cycle + " change to: " + animal.getEvolutionHistory().get(cycle) + "; ";
+
+        }
+        return stringToReturn;
     }
 }

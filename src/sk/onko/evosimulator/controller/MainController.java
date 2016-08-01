@@ -3,6 +3,7 @@ package sk.onko.evosimulator.controller;
 import sk.onko.evosimulator.model.*;
 import sk.onko.evosimulator.gui.GraphMark;
 import sk.onko.evosimulator.utils.EvoLogger;
+import sk.onko.evosimulator.utils.EvoStatistics;
 import sk.onko.evosimulator.utils.SimulationSettings;
 import sk.onko.evosimulator.view.MainView;
 import sk.onko.evosimulator.view.gui.UpdateableView;
@@ -32,7 +33,7 @@ public class MainController {
     protected PlagueMaker plagueMaker = new PlagueMaker();
     protected SpeciesClassifier speciesClassifier = new SpeciesClassifier();
 
-    int cyclesElapsed = 0;
+    public static int cyclesElapsed = 0;
     long beginningOfCycleTime = 0;
 
     public MainController(MainModel mainModel, MainView mainView) {
@@ -53,6 +54,8 @@ public class MainController {
                     worldPopulation += currentRegion.getInhabitantNumber();
                 }
             }
+
+            EvoStatistics.recordWorldToHistory(mainModel);
             endSimulationIfWorldPopulationTooHigh(worldPopulation);
 
             mainView.updateView(mainModel);
@@ -88,6 +91,7 @@ public class MainController {
         if (worldPopulation >= SimulationSettings.MAX_NUM_OF_BEINGS || worldPopulation <= 0) {
             System.out.println(" - - - Number of beings : " + worldPopulation + " - TOO HIGH/LOW. SIMULATION ENDING.");
             if (EvoLogger.loggingStatisticsAfterEnd) EvoLogger.logStatisticsAfterEnd();
+            logHistoryForAnimal();
             System.exit(0);
         } else {
             if (EvoLogger.loggingCycleNumbers) System.out.println(" - - - Starting time cycle number " + cyclesElapsed + " - - -");
@@ -99,6 +103,18 @@ public class MainController {
         if (cyclesElapsed == cycleNumberToLog) {
             long endOfCycleTime = System.currentTimeMillis();
             System.out.println(cycleNumberToLog + " cycles elapsed, took " + (beginningOfCycleTime - endOfCycleTime) + " milliseconds");
+        }
+    }
+
+    private void logHistoryForAnimal(){
+        WorldRegion regionToLogAnimalHistoryFor = mainModel.getWorldRegionMap().get(new Coordinates(1,1));
+        for (AnimalSpecies animalSpecies :  regionToLogAnimalHistoryFor.getAnimalSpeciesList()) {
+            for (Animal animal : animalSpecies.getAnimals()) {
+                if(!animal.getEvolutionHistory().isEmpty()){
+                    System.out.println(EvoLogger.evolutionHistoryForAnimal(animal));
+                    return;
+                }
+            }
         }
     }
 }

@@ -16,6 +16,8 @@ import java.util.TreeMap;
  */
 public class MapPanel extends JPanel implements UpdateableView {
 
+    private int NUM_OF_SPECIES_SHOWN_IN_REGION = 2;
+
     private Map<Coordinates, RegionPanel> worldRegionPanelMap;
     private int mapWidth;
     private int mapHeight;
@@ -93,7 +95,7 @@ public class MapPanel extends JPanel implements UpdateableView {
                 //NEW
                 //int numberOfSpecies = currentRegion.getAnimalSpeciesList().size();
 
-                for (int i = 0; i <= 2; i++) {
+                for (int i = 0; i <= NUM_OF_SPECIES_SHOWN_IN_REGION; i++) {
 
                     AnimalSpecies currentSpecies = currentRegion.getAnimalSpeciesList().get(i);
 
